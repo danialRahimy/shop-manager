@@ -1,0 +1,4 @@
+RewriteEngine on
+RewriteCond %{HTTP_HOST} !-f
+RewriteCond %{HTTP_HOST} !-d
+RewriteRule ^.*$ public/index.php [L,QSA]
