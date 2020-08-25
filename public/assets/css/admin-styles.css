@@ -25,6 +25,10 @@ a:focus {
     transition: all 0.3s;
 }
 
+label{
+    user-select: none;
+}
+
 .navbar {
     padding: 10px 0;
     background: #fff;

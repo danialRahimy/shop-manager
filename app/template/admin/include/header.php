@@ -1,6 +1,3 @@
-<?php
-
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,16 +5,16 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
 
-    <link rel="stylesheet" href="./../assets/css/lib/bootstrap.min.css">
-    <link rel="stylesheet" href="./../assets/css/lib/font-awesome.min.css">
-    <link rel="stylesheet" href="./../assets/css/lib/owl.carousel.min.css">
-    <link rel="stylesheet" href="./../assets/css/lib/owl.theme.default.min.css">
-    <link rel="stylesheet" href="./../assets/css/fonts.css">
+    <link rel="stylesheet" href="<?= STATIC_PATH ?>/css/lib/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= STATIC_PATH ?>/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="<?= STATIC_PATH ?>/css/lib/owl.carousel.min.css">
+    <link rel="stylesheet" href="<?= STATIC_PATH ?>/css/lib/owl.theme.default.min.css">
+    <link rel="stylesheet" href="<?= STATIC_PATH ?>/css/fonts.css">
 
     <!-- Our Custom CSS -->
-    <link rel="stylesheet" href="./../assets/css/admin-styles.css">
+    <link rel="stylesheet" href="<?= STATIC_PATH ?>/css/admin-styles.css">
 
-    <title>dashboard</title>
+    <title><?php echo $title = $title ?? "shop-manager";  ?></title>
 </head>
 
 <body>

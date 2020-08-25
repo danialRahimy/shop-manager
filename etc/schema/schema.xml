@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- SQL XML created by WWW SQL Designer, https://github.com/ondras/wwwsqldesigner/ -->
+<!-- Active URL: https://ondras.zarovi.cz/sql/demo/?keyword=default -->
+<sql>
+    <datatypes db="mysql">
+        <group color="rgb(238,238,170)" label="Numeric">
+            <type label="Integer" quote="" sql="INTEGER" length="0"/>
+            <type label="TINYINT" quote="" sql="TINYINT" length="0"/>
+            <type label="SMALLINT" quote="" sql="SMALLINT" length="0"/>
+            <type label="MEDIUMINT" quote="" sql="MEDIUMINT" length="0"/>
+            <type label="INT" quote="" sql="INT" length="0"/>
+            <type label="BIGINT" quote="" sql="BIGINT" length="0"/>
+            <type label="Decimal" quote="" sql="DECIMAL" length="1" re="DEC"/>
+            <type label="Single precision" quote="" sql="FLOAT" length="0"/>
+            <type label="Double precision" quote="" sql="DOUBLE" length="0" re="DOUBLE"/>
+        </group>
+
+        <group color="rgb(255,200,200)" label="Character">
+            <type label="Char" quote="'" sql="CHAR" length="1"/>
+            <type label="Varchar" quote="'" sql="VARCHAR" length="1"/>
+            <type label="Text" quote="'" sql="MEDIUMTEXT" length="0" re="TEXT"/>
+            <type label="Binary" quote="'" sql="BINARY" length="1"/>
+            <type label="Varbinary" quote="'" sql="VARBINARY" length="1"/>
+            <type label="BLOB" quote="'" sql="BLOB" length="0" re="BLOB"/>
+        </group>
+
+        <group color="rgb(200,255,200)" label="Date &amp; Time">
+            <type label="Date" quote="'" sql="DATE" length="0"/>
+            <type label="Time" quote="'" sql="TIME" length="0"/>
+            <type label="Datetime" quote="'" sql="DATETIME" length="0"/>
+            <type label="Year" quote="" sql="YEAR" length="0"/>
+            <type label="Timestamp" quote="'" sql="TIMESTAMP" length="0"/>
+        </group>
+
+        <group color="rgb(200,200,255)" label="Miscellaneous">
+            <type label="ENUM" quote="" sql="ENUM" length="1"/>
+            <type label="SET" quote="" sql="SET" length="1"/>
+            <type label="Bit" quote="" sql="bit" length="0"/>
+        </group>
+    </datatypes>
+    <table x="991" y="118" name="admin_user">
+    <row name="id" null="0" autoincrement="1">
+        <datatype>INTEGER</datatype>
+    </row>
+    <row name="username" null="0" autoincrement="0">
+        <datatype>VARCHAR(50)</datatype>
+    </row>
+    <row name="password" null="0" autoincrement="0">
+        <datatype>MEDIUMTEXT</datatype>
+    </row>
+    <row name="email" null="0" autoincrement="0">
+        <datatype>VARCHAR(50)</datatype>
+    </row>
+    <row name="cell_number" null="1" autoincrement="0">
+        <datatype>VARCHAR(11)</datatype>
+        <default>NULL</default></row>
+    <row name="role_id" null="0" autoincrement="0">
+        <datatype>INTEGER</datatype>
+        <relation table="acl_role" row="id" />
+    </row>
+    <row name="is_active" null="0" autoincrement="0">
+        <datatype>VARCHAR(1)</datatype>
+        <default>'Y'</default><comment>Y: yes, N: no</comment>
+    </row>
+    <key type="INDEX" name="">
+        <part>id</part>
+    </key>
+</table>
+    <table x="792" y="257" name="acl_role">
+        <row name="id" null="0" autoincrement="1">
+            <datatype>INTEGER</datatype>
+        </row>
+        <row name="title" null="0" autoincrement="0">
+            <datatype>VARCHAR(50)</datatype>
+        </row>
+        <key type="PRIMARY" name="">
+            <part>id</part>
+        </key>
+    </table>
+    <table x="826" y="120" name="acl_access">
+        <row name="id" null="0" autoincrement="1">
+            <datatype>INTEGER</datatype>
+        </row>
+        <row name="role_id" null="0" autoincrement="0">
+            <datatype>INTEGER</datatype>
+            <relation table="acl_role" row="id" />
+        </row>
+        <row name="plugin_id" null="0" autoincrement="0">
+            <datatype>INTEGER</datatype>
+        </row>
+        <row name="access" null="0" autoincrement="0">
+            <datatype>VARCHAR(250)</datatype>
+        </row>
+        <key type="PRIMARY" name="">
+            <part>id</part>
+        </key>
+    </table>
+    <table x="1896" y="860" name="product_category">
+        <row name="id" null="0" autoincrement="1">
+            <datatype>INTEGER</datatype>
+        </row>
+        <row name="title" null="0" autoincrement="0">
+            <datatype>VARCHAR(50)</datatype>
+        </row>
+        <row name="show_in_menu" null="0" autoincrement="0">
+            <datatype>VARCHAR(1)</datatype>
+            <default>'Y'</default><comment>Y: yes, N: no</comment>
+        </row>
+        <row name="description" null="1" autoincrement="0">
+            <datatype>MEDIUMTEXT</datatype>
+        </row>
+        <key type="PRIMARY" name="">
+            <part>id</part>
+        </key>
+    </table>
+    <table x="1290" y="859" name="product_category_sub">
+        <row name="id" null="0" autoincrement="1">
+            <datatype>INTEGER</datatype>
+        </row>
+        <row name="title" null="0" autoincrement="0">
+            <datatype>VARCHAR(50)</datatype>
+        </row>
+        <row name="category_id" null="0" autoincrement="0">
+            <datatype>INTEGER</datatype>
+            <relation table="product_category" row="id" />
+        </row>
+        <row name="show_in_menu" null="0" autoincrement="0">
+            <datatype>VARCHAR(1)</datatype>
+            <default>'Y'</default><comment>Y: yes, N: no</comment>
+        </row>
+        <row name="description" null="1" autoincrement="0">
+            <datatype>MEDIUMTEXT</datatype>
+        </row>
+        <key type="PRIMARY" name="">
+            <part>id</part>
+        </key>
+    </table>
+    <table x="1583" y="543" name="product">
+        <row name="id" null="0" autoincrement="1">
+            <datatype>INTEGER</datatype>
+        </row>
+        <row name="title" null="0" autoincrement="0">
+            <datatype>VARCHAR(250)</datatype>
+        </row>
+        <row name="description" null="1" autoincrement="0">
+            <datatype>MEDIUMTEXT</datatype>
+            <default>NULL</default></row>
+        <row name="category_id" null="0" autoincrement="0">
+            <datatype>INTEGER</datatype>
+            <relation table="product_category" row="id" />
+        </row>
+        <row name="sub_category_id" null="0" autoincrement="0">
+            <datatype>INTEGER</datatype>
+            <relation table="product_category_sub" row="id" />
+        </row>
+        <row name="quantity" null="1" autoincrement="0">
+            <datatype>INTEGER</datatype>
+            <default>NULL</default></row>
+        <row name="buy_price" null="0" autoincrement="0">
+            <datatype>INTEGER</datatype>
+        </row>
+        <row name="sell_price" null="0" autoincrement="0">
+            <datatype>INTEGER</datatype>
+        </row>
+        <row name="brand_id" null="0" autoincrement="0">
+            <datatype>INTEGER</datatype>
+            <relation table="product_brand" row="id" />
+        </row>
+        <row name="is_active" null="0" autoincrement="0">
+            <datatype>VARCHAR(1)</datatype>
+            <default>'N'</default><comment>Y: yes, N: no</comment>
+        </row>
+        <row name="created_by" null="0" autoincrement="0">
+            <datatype>VARCHAR(50)</datatype>
+        </row>
+        <row name="created_at" null="0" autoincrement="0">
+            <datatype>INTEGER</datatype>
+        </row>
+        <key type="PRIMARY" name="">
+            <part>id</part>
+        </key>
+    </table>
+    <table x="1873" y="539" name="product_color">
+        <row name="id" null="0" autoincrement="1">
+            <datatype>INTEGER</datatype>
+        </row>
+        <row name="hex_code" null="0" autoincrement="0">
+            <datatype>VARCHAR(7)</datatype>
+        </row>
+        <row name="title" null="0" autoincrement="0">
+            <datatype>VARCHAR(50)</datatype>
+        </row>
+        <key type="PRIMARY" name="">
+            <part>id</part>
+        </key>
+    </table>
+    <table x="1259" y="531" name="product_image">
+        <row name="id" null="0" autoincrement="1">
+            <datatype>INTEGER</datatype>
+        </row>
+        <row name="product_id" null="0" autoincrement="0">
+            <datatype>INTEGER</datatype>
+            <relation table="product" row="id" />
+        </row>
+        <row name="src" null="0" autoincrement="0">
+            <datatype>VARCHAR(250)</datatype>
+        </row>
+        <row name="is_selected" null="0" autoincrement="0">
+            <datatype>MEDIUMTEXT(1)</datatype>
+            <default>'N'</default><comment>Y: yes, N: no</comment>
+        </row>
+        <row name="is_active" null="0" autoincrement="0">
+            <datatype>VARCHAR(1)</datatype>
+            <default>'Y'</default><comment>Y: yes, N: no</comment>
+        </row>
+        <row name="order" null="0" autoincrement="0">
+            <datatype>INTEGER</datatype>
+            <default>0</default></row>
+        <key type="PRIMARY" name="">
+            <part>id</part>
+        </key>
+    </table>
+    <table x="1271" y="712" name="product_brand">
+        <row name="id" null="0" autoincrement="1">
+            <datatype>INTEGER</datatype>
+        </row>
+        <row name="logo_src" null="0" autoincrement="0">
+            <datatype>VARCHAR(250)</datatype>
+        </row>
+        <row name="title_fa" null="0" autoincrement="0">
+            <datatype>VARCHAR(50)</datatype>
+        </row>
+        <row name="title_en" null="0" autoincrement="0">
+            <datatype>VARCHAR(50)</datatype>
+        </row>
+        <key type="PRIMARY" name="">
+            <part>id</part>
+        </key>
+    </table>
+    <table x="1557" y="301" name="product_comment">
+        <row name="id" null="0" autoincrement="1">
+            <datatype>INTEGER</datatype>
+        </row>
+        <row name="product_id" null="0" autoincrement="0">
+            <datatype>INTEGER</datatype>
+            <relation table="product" row="id" />
+        </row>
+        <row name="comment" null="0" autoincrement="0">
+            <datatype>MEDIUMTEXT</datatype>
+        </row>
+        <row name="star" null="1" autoincrement="0">
+            <datatype>INT</datatype>
+            <default>NULL</default></row>
+        <row name="created_by" null="0" autoincrement="0">
+            <datatype>VARCHAR(50)</datatype>
+        </row>
+        <row name="created_at" null="0" autoincrement="0">
+            <datatype>INT</datatype>
+        </row>
+        <row name="like" null="0" autoincrement="0">
+            <datatype>VARCHAR(1)</datatype>
+            <default>'S'</default><comment>Y: yes, N: no, S: not voited</comment>
+        </row>
+        <key type="PRIMARY" name="">
+            <part>id</part>
+        </key>
+    </table>
+    <table x="1615" y="128" name="customer">
+        <row name="id" null="0" autoincrement="1">
+            <datatype>INTEGER</datatype>
+        </row>
+        <row name="username" null="0" autoincrement="0">
+            <datatype>VARCHAR(50)</datatype>
+        </row>
+        <row name="email" null="0" autoincrement="0">
+            <datatype>VARCHAR(50)</datatype>
+        </row>
+        <row name="cell_number" null="0" autoincrement="0">
+            <datatype>VARCHAR(11)</datatype>
+        </row>
+        <key type="PRIMARY" name="">
+            <part>id</part>
+        </key>
+    </table>
+    <table x="1261" y="317" name="product_stat">
+        <row name="id" null="0" autoincrement="1">
+            <datatype>INTEGER</datatype>
+            <relation table="product" row="id" />
+        </row>
+        <row name="product_id" null="0" autoincrement="0">
+            <datatype>INTEGER</datatype>
+        </row>
+        <row name="view" null="1" autoincrement="0">
+            <datatype>INTEGER</datatype>
+            <default>NULL</default></row>
+        <row name="buy" null="1" autoincrement="0">
+            <datatype>INTEGER</datatype>
+            <default>NULL</default></row>
+        <row name="reject" null="1" autoincrement="0">
+            <datatype>INT</datatype>
+            <default>NULL</default></row>
+        <key type="PRIMARY" name="">
+            <part>id</part>
+        </key>
+    </table>
+    <table x="2066" y="129" name="customer_address">
+        <row name="id" null="0" autoincrement="1">
+            <datatype>INTEGER</datatype>
+        </row>
+        <row name="customer" null="0" autoincrement="0">
+            <datatype>VARCHAR(50)</datatype>
+        </row>
+        <row name="address" null="0" autoincrement="0">
+            <datatype>VARCHAR(250)</datatype>
+        </row>
+        <row name="description" null="0" autoincrement="0">
+            <datatype>MEDIUMTEXT</datatype>
+        </row>
+        <row name="is_selected" null="0" autoincrement="0">
+            <datatype>VARCHAR(1)</datatype>
+            <default>'N'</default><comment>Y: yes, N: no</comment>
+        </row>
+        <row name="receiver_name" null="1" autoincrement="0">
+            <datatype>VARCHAR(50)</datatype>
+            <default>NULL</default></row>
+        <row name="receiver_cell_number" null="1" autoincrement="0">
+            <datatype>VARCHAR(11)</datatype>
+            <default>NULL</default></row>
+        <key type="PRIMARY" name="">
+            <part>id</part>
+        </key>
+    </table>
+    <table x="1266" y="122" name="customer_basket">
+        <row name="id" null="1" autoincrement="1">
+            <datatype>INTEGER</datatype>
+            <default>NULL</default></row>
+        <row name="customer" null="0" autoincrement="0">
+            <datatype>VARCHAR(50)</datatype>
+        </row>
+        <row name="product_id" null="0" autoincrement="0">
+            <datatype>INTEGER</datatype>
+            <relation table="product" row="id" />
+        </row>
+        <row name="meta" null="0" autoincrement="0">
+            <datatype>MEDIUMTEXT</datatype>
+        </row>
+        <key type="PRIMARY" name="">
+            <part>id</part>
+        </key>
+    </table>
+    <table x="1877" y="704" name="product_relation_color">
+        <row name="id" null="0" autoincrement="1">
+            <datatype>INTEGER</datatype>
+        </row>
+        <row name="color_id" null="0" autoincrement="0">
+            <datatype>INTEGER</datatype>
+            <relation table="product_color" row="id" />
+        </row>
+        <row name="product_id" null="0" autoincrement="0">
+            <datatype>INTEGER</datatype>
+            <relation table="product" row="id" />
+        </row>
+        <key type="PRIMARY" name="">
+            <part>id</part>
+        </key>
+    </table>
+    <table x="1856" y="129" name="customer_factor">
+        <row name="id" null="1" autoincrement="1">
+            <datatype>INTEGER</datatype>
+            <default>NULL</default></row>
+        <row name="customer" null="0" autoincrement="0">
+            <datatype>VARCHAR(50)</datatype>
+        </row>
+        <row name="payed" null="0" autoincrement="0">
+            <datatype>VARCHAR(1)</datatype>
+            <default>'N'</default><comment>Y: yes, N: no, S: not action</comment>
+        </row>
+        <row name="address_id" null="0" autoincrement="0">
+            <datatype>INTEGER</datatype>
+            <relation table="customer_address" row="id" />
+        </row>
+        <row name="total" null="0" autoincrement="0">
+            <datatype>INTEGER</datatype>
+        </row>
+        <key type="PRIMARY" name="">
+            <part>id</part>
+        </key>
+    </table>
+    <table x="1925" y="346" name="customer_factor_details">
+        <row name="id" null="1" autoincrement="1">
+            <datatype>INTEGER</datatype>
+            <default>NULL</default></row>
+        <row name="factor_id" null="0" autoincrement="0">
+            <datatype>INTEGER</datatype>
+            <relation table="customer_factor" row="id" />
+        </row>
+        <row name="product_id" null="0" autoincrement="0">
+            <datatype>INTEGER</datatype>
+            <relation table="product" row="id" />
+        </row>
+        <row name="product_details" null="0" autoincrement="0">
+            <datatype>MEDIUMTEXT</datatype>
+        </row>
+        <key type="PRIMARY" name="">
+            <part>id</part>
+        </key>
+    </table>
+    <table x="308" y="118" name="shop_section">
+        <row name="id" null="0" autoincrement="1">
+            <datatype>INTEGER</datatype>
+        </row>
+        <row name="sec_type" null="0" autoincrement="0">
+            <datatype>VARCHAR(50)</datatype>
+        </row>
+        <row name="title" null="0" autoincrement="0">
+            <datatype>INTEGER</datatype>
+        </row>
+        <row name="is_active" null="0" autoincrement="0">
+            <datatype>VARCHAR(1)</datatype>
+            <default>'Y'</default><comment>Y: yes, N: no</comment>
+        </row>
+        <key type="PRIMARY" name="">
+            <part>id</part>
+        </key>
+    </table>
+    <table x="542" y="117" name="adv">
+        <row name="id" null="0" autoincrement="1">
+            <datatype>INTEGER</datatype>
+        </row>
+        <row name="title" null="0" autoincrement="0">
+            <datatype>VARCHAR(255)</datatype>
+        </row>
+        <row name="description" null="1" autoincrement="0">
+            <datatype>MEDIUMTEXT</datatype>
+        </row>
+        <row name="src" null="0" autoincrement="0">
+            <datatype>VARCHAR(255)</datatype>
+        </row>
+        <row name="url" null="0" autoincrement="0">
+            <datatype>MEDIUMTEXT</datatype>
+        </row>
+        <row name="sec_id" null="0" autoincrement="0">
+            <datatype>INTEGER</datatype>
+            <relation table="shop_section" row="id" />
+        </row>
+        <row name="is_active" null="0" autoincrement="0">
+            <datatype>VARCHAR(1)</datatype>
+            <default>'Y'</default><comment>Y: yes, N: no</comment>
+        </row>
+        <row name="order" null="0" autoincrement="0">
+            <datatype>INTEGER</datatype>
+            <default>0</default></row>
+        <key type="PRIMARY" name="">
+            <part>id</part>
+        </key>
+    </table>
+    <table x="226.5999984741211" y="402" name="shop_home_layout">
+        <row name="id" null="0" autoincrement="1">
+            <datatype>INTEGER</datatype>
+        </row>
+        <row name="title" null="0" autoincrement="0">
+            <datatype>VARCHAR(50)</datatype>
+        </row>
+        <row name="description" null="0" autoincrement="0">
+            <datatype>MEDIUMTEXT</datatype>
+        </row>
+        <row name="json_meta" null="0" autoincrement="0">
+            <datatype>MEDIUMTEXT</datatype>
+        </row>
+        <row name="is_active" null="0" autoincrement="0">
+            <datatype>VARCHAR(1)</datatype>
+            <default>'N'</default><comment>Y: yes, N: no</comment>
+        </row>
+        <row name="layout_section_id" null="0" autoincrement="0">
+            <datatype>INTEGER</datatype>
+            <relation table="shop_home_layout_section" row="id" />
+        </row>
+        <key type="PRIMARY" name="">
+            <part>id</part>
+        </key>
+    </table>
+    <table x="445" y="484" name="shop_home_layout_section">
+        <row name="id" null="0" autoincrement="1">
+            <datatype>INTEGER</datatype>
+        </row>
+        <row name="title" null="0" autoincrement="0">
+            <datatype>VARCHAR(50)</datatype>
+        </row>
+        <row name="description" null="1" autoincrement="0">
+            <datatype>MEDIUMTEXT</datatype>
+        </row>
+        <row name="img_scr" null="0" autoincrement="0">
+            <datatype>MEDIUMTEXT</datatype>
+        </row>
+        <key type="PRIMARY" name="">
+            <part>id</part>
+        </key>
+    </table>
+    <table x="799" y="400.5454559326172" name="shop_landing">
+        <row name="id" null="0" autoincrement="1">
+            <datatype>INTEGER</datatype>
+        </row>
+        <row name="url" null="0" autoincrement="0">
+            <datatype>VARCHAR(250)</datatype>
+        </row>
+        <row name="title" null="0" autoincrement="0">
+            <datatype>VARCHAR(250)</datatype>
+        </row>
+        <row name="description" null="0" autoincrement="0">
+            <datatype>MEDIUMTEXT</datatype>
+        </row>
+        <row name="is_active" null="0" autoincrement="0">
+            <datatype>VARCHAR(1)</datatype>
+            <default>'Y'</default><comment>Y: yes, N: no</comment>
+        </row>
+        <row name="show_in_menu" null="0" autoincrement="0">
+            <datatype>VARCHAR(1)</datatype>
+            <default>'Y'</default><comment>Y: yes, N: no</comment>
+        </row>
+        <key type="PRIMARY" name="">
+            <part>id</part>
+        </key>
+    </table>
+    <table x="1860.9090576171875" y="9" name="customer_product_favorite">
+        <row name="id" null="0" autoincrement="1">
+            <datatype>INTEGER</datatype>
+        </row>
+        <row name="customer" null="0" autoincrement="0">
+            <datatype>VARCHAR(50)</datatype>
+        </row>
+        <row name="product_id" null="0" autoincrement="0">
+            <datatype>INTEGER</datatype>
+            <relation table="product" row="id" />
+        </row>
+        <key type="PRIMARY" name="">
+            <part>id</part>
+        </key>
+    </table>
+</sql>

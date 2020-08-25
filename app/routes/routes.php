@@ -1,3 +1,3 @@
 <?php
 
-$routes[] = array("/", "index", "index");
+$routes[] = array("admin", "admin", "index");

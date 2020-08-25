@@ -114,7 +114,7 @@ class Router
 
     protected function pageNotFound()
     {
-        (new ErrorController())->notFoundAction();
+        (new ErrorController("error","notFound"))->notFoundAction();
     }
 
     protected function getParts($uri = "")

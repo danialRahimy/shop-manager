@@ -12,12 +12,16 @@ class DispatcherManual extends Dispatcher
     {
         $this->requestUri = $_SERVER["REQUEST_URI"];
         $this->matchRoute = $matchRoute;
+
+        if (strpos($this->matchRoute[0], "admin") !== false)
+            require_once APP_PATH . "/admin_bootstrap.php";
         $this->setController();
     }
 
     public function setController()
     {
         $controller = $this->matchRoute[1];
+        // IF INJECT A CALLBACK FUNCTION INSTEAD OF CONTROLLER ACTION
         if (gettype($controller) === "object"){
             $controller();
             return;
@@ -37,7 +41,9 @@ class DispatcherManual extends Dispatcher
     {
         $action = $this->matchRoute[2];
         $action = $action . "Action";
-        $controllerObj = new $this->controller();
+        $this->action = $action;
+        $controllerObj = new $this->controller($this->controller, $action);
+
         if (method_exists($controllerObj, $action)) {
             $params = $this->setParams();
             $controllerObj->$action($params);
@@ -45,6 +51,16 @@ class DispatcherManual extends Dispatcher
             echo "Action Doesn't Exist <br>";
             $this->pageNotFound();
         }
+    }
+
+    public function getController()
+    {
+        return $this->controller;
+    }
+
+    public function getAction()
+    {
+        return $this->action;
     }
 
     public function setParams()
