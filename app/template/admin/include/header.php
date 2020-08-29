@@ -17,7 +17,7 @@
     <title><?php echo $title = $title ?? "shop-manager";  ?></title>
 </head>
 
-<body>
+<body id="<?php echo $pageID = $pageID ?? "";?>">
 <div class="wrapper">
     <!-- Sidebar  -->
     <?php require_once 'sidebar.php'?>

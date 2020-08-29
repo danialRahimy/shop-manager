@@ -27,6 +27,7 @@ a:focus {
 
 label{
     user-select: none;
+    margin-bottom: 0;
 }
 
 .navbar {

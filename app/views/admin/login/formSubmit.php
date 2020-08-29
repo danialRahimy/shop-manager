@@ -12,6 +12,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
         else
             throw new ExceptionUser("لطفا نام کاربری و رمز عبور خود را وارد کنید");
 
-    (new AdminUserModel())->login($email, $password);
+    (new Authentication())->login($email, $password);
 
 }

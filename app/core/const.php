@@ -13,3 +13,4 @@ define("TEMPLATE_PATH", APP_PATH . "/template");
 // DATABASE TABLES
 
 define("TB_ADMIN_USERS", "admin_user");
+define("TB_ADMIN_ROLE", "acl_role");

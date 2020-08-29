@@ -5,6 +5,7 @@ use Zend\Db\Adapter\Adapter;
 
 class BaseModel extends TableGateway
 {
+    use Request;
 
     public function __construct()
     {

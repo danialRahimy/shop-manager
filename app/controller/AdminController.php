@@ -18,4 +18,9 @@ class AdminController extends BaseController
     {
         echo 123;
     }
+
+    public function testAction()
+    {
+        echo "test";
+    }
 }

@@ -3,6 +3,8 @@
 
 abstract class BaseController
 {
+    use Request;
+
     protected $view;
 
     public function __construct($controller,$action)

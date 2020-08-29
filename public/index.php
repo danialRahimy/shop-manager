@@ -3,6 +3,8 @@
 require_once "../app/bootstrap.php";
 try {
     $dispatcher = new Dispatcher($routes);
-}catch (Exception $error){
+}catch (ExceptionUser $error){
+    echo $error->getMessage();
+}catch (ExceptionDev $error){
     echo $error->getMessage();
 }

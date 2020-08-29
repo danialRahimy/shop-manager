@@ -10,6 +10,12 @@ class Router
     public function __construct($routes)
     {
         $this->requestUri = $_SERVER["REQUEST_URI"];
+
+        if ($pos = strpos($this->requestUri, "?")){
+
+            $this->requestUri = substr($this->requestUri,0, $pos);
+        }
+
         $this->routes = $routes;
         $parts = $this->getParts($this->requestUri);
         $this->findMatch($this->routes, $parts, 0);
@@ -53,6 +59,13 @@ class Router
                         $needToMatch = $value;
                         break;
                     }
+                }
+
+                if (count($needToMatch) === 0){
+
+                    echo "Doesn't Find Match Route In Route List<br>";
+                    $this->pageNotFound();
+                    return;
                 }
 
                 if (count($parts) === $this->countRoutePart($needToMatch[0])) {
