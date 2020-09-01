@@ -4,21 +4,8 @@ namespace Form\FormElement;
 
 use Form\FormException;
 
-abstract class AbstractInputFormElement extends AbstractFormElement
+class FormTextareaElement extends AbstractFormElement
 {
-    /**
-     * @var $inputType
-     * input type : text|password|email|url| ... and all input type
-     */
-    protected $inputType;
-
-    /**
-     * @var $requireFeaturesElement
-     *
-     * in $elementDetail some keys maybe require to create element, they are here
-     */
-    protected $requireFeaturesElement = array();
-
     /**
      * @return string
      * @throws FormException
@@ -27,8 +14,7 @@ abstract class AbstractInputFormElement extends AbstractFormElement
     {
         $this->validateElementFeatures();
 
-        $tagAttribute = "type='$this->inputType' ";
-        $tagAttribute .= "name='" . $this->elementDetail["name"] . "' ";
+        $tagAttribute = "name='" . $this->elementDetail["name"] . "' ";
 
         if (
             array_key_exists("required", $this->elementDetail) and
@@ -50,11 +36,17 @@ abstract class AbstractInputFormElement extends AbstractFormElement
 
             foreach ($this->elementDetail["attributes"] as $attribute => $value) {
 
-                $tagAttribute .= "$attribute='$value' ";
+                $tagAttribute .= "{$attribute}='{$value}' ";
             }
         }
 
-        $this->element = "<input $tagAttribute>";
+        $innerText = "";
+        if (isset($this->elementDetail["text"])) {
+
+            $innerText = $this->elementDetail["text"];
+        }
+
+        $this->element = "<textarea {$tagAttribute}>{$innerText}</textarea>";
 
         $this->replaceParentElement();
 

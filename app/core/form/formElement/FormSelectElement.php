@@ -4,20 +4,16 @@ namespace Form\FormElement;
 
 use Form\FormException;
 
-abstract class AbstractInputFormElement extends AbstractFormElement
+class FormSelectElement extends AbstractFormElement
 {
-    /**
-     * @var $inputType
-     * input type : text|password|email|url| ... and all input type
-     */
-    protected $inputType;
-
     /**
      * @var $requireFeaturesElement
      *
      * in $elementDetail some keys maybe require to create element, they are here
      */
-    protected $requireFeaturesElement = array();
+    protected $requireFeaturesElement = array(
+        "options"
+    );
 
     /**
      * @return string
@@ -27,8 +23,7 @@ abstract class AbstractInputFormElement extends AbstractFormElement
     {
         $this->validateElementFeatures();
 
-        $tagAttribute = "type='$this->inputType' ";
-        $tagAttribute .= "name='" . $this->elementDetail["name"] . "' ";
+        $tagAttribute = "name='" . $this->elementDetail["name"] . "' ";
 
         if (
             array_key_exists("required", $this->elementDetail) and
@@ -50,11 +45,17 @@ abstract class AbstractInputFormElement extends AbstractFormElement
 
             foreach ($this->elementDetail["attributes"] as $attribute => $value) {
 
-                $tagAttribute .= "$attribute='$value' ";
+                $tagAttribute .= "{$attribute}='{$value}' ";
             }
         }
 
-        $this->element = "<input $tagAttribute>";
+        $options = "";
+        foreach ($this->elementDetail["options"] as $value => $text) {
+
+            $options .= "<option value='$value'>{$text}</option>";
+        }
+
+        $this->element = "<select {$tagAttribute}>$options</select>";
 
         $this->replaceParentElement();
 

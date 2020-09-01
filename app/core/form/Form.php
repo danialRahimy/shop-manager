@@ -54,13 +54,11 @@ class Form implements FormInterface
 
             foreach ($names as $name){
 
-                if (!isset($_REQUEST[$name])){
+                if (isset($_REQUEST[$name])){
 
-                    return $this->isSubmit = false;
+                    return $this->isSubmit = true;
                 }
             }
-
-            return $this->isSubmit = true;
         }
 
         return $this->isSubmit = false;
