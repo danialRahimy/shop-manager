@@ -4,6 +4,8 @@ use Form\Form;
 use Form\FormElement\FormSubmitElement;
 use Form\FormElement\FormTextElement;
 use Form\FormElement\FormFileElement;
+use Form\Validator\ValidatorEnglishLetters;
+use Form\Validator\ValidatorFarsiLetters;
 
 $formConfig = array(
     "attributes" => array(
@@ -26,6 +28,7 @@ $formElement[] = array(
     "label" => array(
         "text" => "نام برند"
     ),
+    "validator" => (new ValidatorFarsiLetters())
 );
 $formElement[] = array(
     "type" => (new FormTextElement()),
@@ -37,12 +40,14 @@ $formElement[] = array(
     "label" => array(
         "text" => "نام انگلیسی"
     ),
+    "validator" => (new ValidatorEnglishLetters())
 );
 $formElement[] = array(
     "type" => (new FormFileElement()),
     "name" => "logo_src",
     "attributes" => array(
-        "class" => "mb-3 form-control col-6"
+        "class" => "mb-3 form-control col-6",
+        "accept" => ".jpg,.jpeg,.jfif,.pjpeg,.pjp,.png"
     ),
     "label" => array(
         "text" => "لوگو"

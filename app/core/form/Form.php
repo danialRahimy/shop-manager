@@ -173,25 +173,6 @@ class Form implements FormInterface
         return $this->errorMessagesString;
     }
 
-    public function getSampleElementArray()
-    {
-        $elements = array(
-            "type" => "شیء از اینترفیس FormElementInterface باشد و اجباری است",
-            "name" => "اتریبوت name و اجباری است",
-            "attributes" => array(
-                "نام اتریبیوت" => "مقدار اتریبویت"
-            ),
-            "label" => array(
-                "text" => "متن داخل لیبل",
-                "attributes" => array(
-                    "نام اتریبیوت" => "مقدار اتریبویت"
-                )
-            )
-        );
-
-        return $elements;
-    }
-
     protected function replaceParentAll()
     {
         if (

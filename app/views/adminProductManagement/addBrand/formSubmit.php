@@ -3,9 +3,7 @@
 $data = array(
     "title_fa" => $newBrandTitleFA,
     "title_en" => $newBrandTitleEN,
-    "logo_src" => $newBrandSRC
 );
-var_dump($data);die();
 
 $model = new BrandModel();
 $select = $model->select($data);
@@ -14,14 +12,36 @@ if (is_array($select) and count($select) > 0){
 
     echo "<div class='alert alert-danger'>امکان ثبت برند تکراری وجود ندارد</div>";
 }else{
+    $status = false;
+    $connection = $model->getSql()->getAdapter()->getDriver()->getConnection();
+    $connection->beginTransaction();
 
-    $status = $model->insert($data);
+    try {
 
-    if (!$status){
+        $contentManager = new Content();
+        $path = "/AdminProductManagementController";
+        $types = array(
+            ".jpg", ".jpeg", ".jfif", ".pjpeg", ".pjp", ".png"
+        );
+        $fileName = $contentManager->add("logo_src", $path, $types, 9999, Content::IMAGE);
+        $data["logo_src"] = $fileName;
+        $status = $model->insert($data);
+        $connection->commit();
+    }catch (ExceptionUser $e){
+        $errorMessage = $e->getMessage();
+        echo "<div class='alert alert-danger'>$errorMessage</div>";
+        $connection->rollback();
+    }catch (Exception $e){
+
+        echo $e->getMessage();
+        $connection->rollback();
+    }
+
+    if (!$status and !$errorMessage){
 
         echo "<div class='alert alert-danger'>مشکلی پیش آمده است لطفا دوباره تلاش کنید</div>";
     }else{
-
-        echo "<div class='alert alert-success'>برند جدید با موفقیت افزوده شد</div>";
+        if (!isset($errorMessage))
+            echo "<div class='alert alert-success'>برند جدید با موفقیت افزوده شد</div>";
     }
 }

@@ -173,12 +173,12 @@ class AdminProductManagementController extends BaseController
 
     public function addBrandAction()
     {
-//        $newBrandTitleFA = $this->getRequest("title_fa");
-//        $newBrandTitleEN = $this->getRequest("title_en");
+        $newBrandTitleFA = $this->getRequest("title_fa");
+        $newBrandTitleEN = $this->getRequest("title_en");
         $newBrandSRC = $this->getRequest("logo_src");
 
-//        $this->view->newBrandTitleFA = $newBrandTitleFA;
-//        $this->view->newBrandTitleEN = $newBrandTitleEN;
+        $this->view->newBrandTitleFA = $newBrandTitleFA;
+        $this->view->newBrandTitleEN = $newBrandTitleEN;
         $this->view->newBrandSRC = $newBrandSRC;
 
 
