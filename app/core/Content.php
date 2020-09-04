@@ -2,7 +2,7 @@
 
 class Content
 {
-    public const IMAGE = "image";
+    public const IMAGE = "images";
     private $file;
     private $types;
     private $destination;
