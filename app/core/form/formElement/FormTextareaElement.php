@@ -23,6 +23,13 @@ class FormTextareaElement extends AbstractFormElement
 
             $tagAttribute .= "required ";
         }
+        if (
+            array_key_exists("disabled", $this->elementDetail) and
+            $this->elementDetail["disabled"]
+        ) {
+
+            $tagAttribute .= "disabled ";
+        }
 
         if (array_key_exists("attributes", $this->elementDetail)) {
 

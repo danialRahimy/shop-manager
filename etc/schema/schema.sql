@@ -61,6 +61,7 @@ DROP TABLE IF EXISTS `product_category`;
 CREATE TABLE `product_category` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(50) NOT NULL,
+  `parent_id` INT DEFAULT 0,
   `show_in_menu` VARCHAR(1) NOT NULL DEFAULT 'Y' COMMENT 'Y: yes, N: no',
   `description` MEDIUMTEXT NULL,
   PRIMARY KEY (`id`)
@@ -71,16 +72,16 @@ CREATE TABLE `product_category` (
 --
 -- ---
 
-DROP TABLE IF EXISTS `product_category_sub`;
+-- DROP TABLE IF EXISTS `product_category_sub`;
 
-CREATE TABLE `product_category_sub` (
-  `id` INTEGER NOT NULL AUTO_INCREMENT,
-  `title` VARCHAR(50) NOT NULL,
-  `category_id` INTEGER NOT NULL,
-  `show_in_menu` VARCHAR(1) NOT NULL DEFAULT 'Y' COMMENT 'Y: yes, N: no',
-  `description` MEDIUMTEXT NULL,
-  PRIMARY KEY (`id`)
-);
+-- CREATE TABLE `product_category_sub` (
+--   `id` INTEGER NOT NULL AUTO_INCREMENT,
+--   `title` VARCHAR(50) NOT NULL,
+--   `category_id` INTEGER NOT NULL,
+--   `show_in_menu` VARCHAR(1) NOT NULL DEFAULT 'Y' COMMENT 'Y: yes, N: no',
+--   `description` MEDIUMTEXT NULL,
+--   PRIMARY KEY (`id`)
+-- );
 
 -- ---
 -- Table 'product'
@@ -94,7 +95,7 @@ CREATE TABLE `product` (
   `title` VARCHAR(250) NOT NULL,
   `description` MEDIUMTEXT NULL DEFAULT NULL,
   `category_id` INTEGER NOT NULL,
-  `sub_category_id` INTEGER NOT NULL,
+--   `sub_category_id` INTEGER NOT NULL,
   `quantity` INTEGER NULL DEFAULT NULL,
   `buy_price` INTEGER NOT NULL,
   `sell_price` INTEGER NOT NULL,

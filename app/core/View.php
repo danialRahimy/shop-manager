@@ -39,7 +39,6 @@ class View
         foreach ($this->viewInject as $variableName => $variableValue){
             $$variableName = $variableValue;
         }
-
         $contentPath = $this->path;
         if (file_exists($this->path)){
             require_once VIEW_PATH . "/index.php";
@@ -55,7 +54,7 @@ class View
         }
 
         if (file_exists($this->path)){
-            require_once $this->path;
+            require_once "$this->path";
         }
     }
 

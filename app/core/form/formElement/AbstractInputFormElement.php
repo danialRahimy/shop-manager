@@ -37,6 +37,20 @@ abstract class AbstractInputFormElement extends AbstractFormElement
 
             $tagAttribute .= "required ";
         }
+        if (
+            array_key_exists("checked", $this->elementDetail) and
+            $this->elementDetail["checked"]
+        ) {
+
+            $tagAttribute .= "checked ";
+        }
+        if (
+            array_key_exists("disabled", $this->elementDetail) and
+            $this->elementDetail["disabled"]
+        ) {
+
+            $tagAttribute .= "disabled ";
+        }
 
         if (array_key_exists("attributes", $this->elementDetail)) {
 

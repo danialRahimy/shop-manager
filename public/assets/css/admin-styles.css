@@ -451,3 +451,31 @@ a.article:hover {
     color: #1b1e21;
     margin: 0;
 }
+
+
+
+.admin-table-edit {
+    color: #e1e1e1;
+    font-size: 20px;
+    padding: 10px;
+}
+.admin-table-remove {
+    color: #e1e1e1;;
+    font-size: 21px;
+    padding: 10px;
+}
+.table-hover tbody tr:hover .admin-table-edit, .admin-table-edit:hover {
+    color: #1e45ea;
+}
+.table-hover tbody tr:hover .admin-table-remove, .admin-table-remove:hover {
+    color: #e34d4d;
+}
+.colorShowBox {
+    width: 70px;
+    height: 26px;
+    border-radius: 4px;
+}
+.showBrand {
+    max-width: 100px;
+    max-height: 50px;
+}

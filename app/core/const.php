@@ -3,6 +3,7 @@
 define("SUB_DIRECTORY", "");
 define("ROOT", $_SERVER["DOCUMENT_ROOT"] . SUB_DIRECTORY);
 define("STATIC_PATH", SUB_DIRECTORY . "/public/assets");
+define("FILES_PATH", SUB_DIRECTORY . "/files");
 define("APP_PATH", $_SERVER["DOCUMENT_ROOT"] . "/app");
 define("CORE_PATH", APP_PATH . "/core");
 define("CONTROLLER_PATH", APP_PATH . "/controller");
@@ -14,3 +15,7 @@ define("TEMPLATE_PATH", APP_PATH . "/template");
 
 define("TB_ADMIN_USERS", "admin_user");
 define("TB_ADMIN_ROLE", "acl_role");
+define("TB_PRODUCT", "product");
+define("TB_PRODUCT_CATEGORIES", "product_category");
+define("TB_PRODUCT_COLORS", "product_color");
+define("TB_PRODUCT_BRANDS", "product_brand");
