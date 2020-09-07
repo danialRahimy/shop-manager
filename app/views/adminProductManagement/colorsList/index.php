@@ -13,10 +13,10 @@ foreach ($colors as $key => $record){
     ";
 
     $colors[$key]["operation"] = "
-        <a class='admin-table-edit' href='/admin/adminProductManagement/editingColor?id=$record[id]'>
+        <a class='admin-table-edit' href='/admin/adminProductManagement/editingColor/$record[id]'>
             <i class='fa fa-edit'></i>
         </a>
-        <a class='admin-table-remove' href='/admin/adminProductManagement/deletingColor?id=$record[id]'>
+        <a class='admin-table-remove' href='/admin/adminProductManagement/deletingColor/$record[id]'>
             <i class='fa fa-trash-o'></i>
         </a> 
     ";

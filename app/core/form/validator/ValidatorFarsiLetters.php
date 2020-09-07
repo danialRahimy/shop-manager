@@ -20,7 +20,7 @@ class ValidatorFarsiLetters implements ValidatorInterface
 
         $dataValid = utf8_decode($input);
 
-        if (!preg_match("/^[\?]+$/", $dataValid))
+        if (!preg_match("/^[\? ]+$/", $dataValid))
             return $this->isValid = false;
 
         return $this->isValid = true;

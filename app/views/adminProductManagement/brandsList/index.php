@@ -9,13 +9,13 @@ $columnNames = array(
 );
 
 foreach ($brands as $key => $record){
-    $brands[$key]["logo_src"] = "<img class='showBrand' src='". FILES_PATH . "/images/" . $brands[$key]["logo_src"] . "'>";
+    $brands[$key]["logo_src"] = "<img class='showBrand' src='/files" . $brands[$key]["logo_src"] . "'>";
 
     $brands[$key]["operation"] = "
-        <a class='admin-table-edit' href='/admin/adminProductManagement/editingBrand?id=$record[id]'>
+        <a class='admin-table-edit' href='/admin/adminProductManagement/editingBrand/$record[id]'>
             <i class='fa fa-edit'></i>
         </a>
-        <a class='admin-table-remove' href='/admin/adminProductManagement/deletingBrand?id=$record[id]'>
+        <a class='admin-table-remove' href='/admin/adminProductManagement/deletingBrand/$record[id]'>
             <i class='fa fa-trash-o'></i>
         </a> 
     ";

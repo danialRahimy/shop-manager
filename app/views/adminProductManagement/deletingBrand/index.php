@@ -1,5 +1,5 @@
 <?php
-require_once "formSubmit.php";
+require_once "formShow.php";
 
 require_once "form.php";
 

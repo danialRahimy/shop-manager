@@ -14,6 +14,15 @@ $model = new CategoryModel();
 
 $status = $model->update($data,$dataId);
 
+if (!$status){
+
+    echo "<div class='alert alert-danger'>مشکلی پیش آمده است لطفا دوباره تلاش کنید</div>";
+}else{
+
+    echo "<div class='alert alert-success'>دسته بندی  با موفقیت ویرایش شد</div>";
+}
+
+
 $allCats = $model->select();
 
 foreach ($allCats as $cat) {
@@ -32,10 +41,4 @@ if ($select['parent_id'] == 0) {
     }
 }
 
-if (!$status){
 
-    echo "<div class='alert alert-danger'>مشکلی پیش آمده است لطفا دوباره تلاش کنید</div>";
-}else{
-
-    echo "<div class='alert alert-success'>دسته بندی  با موفقیت ویرایش شد</div>";
-}

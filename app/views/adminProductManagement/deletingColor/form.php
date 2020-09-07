@@ -9,8 +9,8 @@ $formConfig = array(
     "attributes" => array(
         "method" => "post",
         "class" => "mb-2",
-        "action" => "/admin/adminProductManagement/removeColor?id=$deletingColorId",
-        "name" => "editColorForm"
+        "action" => "/admin/adminProductManagement/removeColor/$deletingColorId",
+        "name" => "deletingColorForm"
     )
 );
 
@@ -46,7 +46,7 @@ $formElement[] = array(
 
 $formElement[] = array(
     "type" => (new FormSubmitElement()),
-    "name" => "editCategory",
+    "name" => "deletingColorBtn",
     "attributes" => array(
         "value" => "حذف رنگ",
         "class" => "d-block btn btn-danger"

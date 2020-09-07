@@ -40,7 +40,7 @@ $formElement[] = array(
 
 $formElement[] = array(
     "type" => (new FormSubmitElement()),
-    "name" => "submitAddCategory",
+    "name" => "addColorBtn",
     "attributes" => array(
         "value" => "افزودن",
         "class" => "d-block btn btn-primary"

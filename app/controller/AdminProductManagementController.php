@@ -36,9 +36,9 @@ class AdminProductManagementController extends BaseController
         echo $this->view->render();
     }
 
-    public function selectCategoryForEditAction()
+    public function editingCategoryAction($params = array())
     {
-        $editingCategoryId = $this->getRequest("id");
+        $editingCategoryId = $params['id'];
 
         $this->view->editingCategoryId = $editingCategoryId;
 
@@ -49,9 +49,9 @@ class AdminProductManagementController extends BaseController
 
         echo $this->view->render();
     }
-    public function editCategoryAction()
+    public function editCategoryAction($params = array())
     {
-        $editingCategoryId = $this->getRequest("id");
+        $editingCategoryId = $params['id'];
         $newCategoryTitle = $this->getRequest("title");
         $newCategoryParentID = $this->getRequest("parent_id");
         $newCategoryDescription = $this->getRequest("description");
@@ -66,16 +66,16 @@ class AdminProductManagementController extends BaseController
         echo $this->view->render();
     }
 
-    public function deletingCategoryAction()
+    public function deletingCategoryAction($params = array())
     {
-        $deletingCategoryId = $this->getRequest("id");
+        $deletingCategoryId = $params['id'];
         $this->view->deletingCategoryId = $deletingCategoryId;
 
         echo $this->view->render();
     }
-    public function removeCategoryAction()
+    public function removeCategoryAction($params = array())
     {
-        $deletingCategoryId = $this->getRequest("id");
+        $deletingCategoryId = $params['id'];
         $this->view->deletingCategoryId = $deletingCategoryId;
 
         $categories = (new CategoryModel())->select(function (Select $select) {
@@ -111,9 +111,9 @@ class AdminProductManagementController extends BaseController
         echo $this->view->render();
     }
 
-    public function editingColorAction()
+    public function editingColorAction($params = array())
     {
-        $editingColorId = $this->getRequest("id");
+        $editingColorId = $params['id'];
 
         $this->view->editingColorId = $editingColorId;
 
@@ -124,9 +124,9 @@ class AdminProductManagementController extends BaseController
 
         echo $this->view->render();
     }
-    public function editColorAction()
+    public function editColorAction($params = array())
     {
-        $editingColorId = $this->getRequest("id");
+        $editingColorId = $params['id'];
         $newColorTitle = $this->getRequest("title");
         $newColorHexCode = $this->getRequest("hex_code");
 
@@ -137,22 +137,17 @@ class AdminProductManagementController extends BaseController
         echo $this->view->render();
     }
 
-    public function deletingColorAction()
+    public function deletingColorAction($params = array())
     {
-        $deletingColorId = $this->getRequest("id");
+        $deletingColorId = $params['id'];
         $this->view->deletingColorId = $deletingColorId;
 
         echo $this->view->render();
     }
-    public function removeColorAction()
+    public function removeColorAction($params = array())
     {
-        $deletingColorId = $this->getRequest("id");
+        $deletingColorId = $params['id'];
         $this->view->deletingColorId = $deletingColorId;
-
-        $colors = (new ColorModel())->select(function (Select $select) {
-            $select->order('id ASC');
-        });
-        $this->view->colors = $colors;
 
         echo $this->view->render();
     }
@@ -175,12 +170,52 @@ class AdminProductManagementController extends BaseController
     {
         $newBrandTitleFA = $this->getRequest("title_fa");
         $newBrandTitleEN = $this->getRequest("title_en");
-        $newBrandSRC = $this->getRequest("logo_src");
 
         $this->view->newBrandTitleFA = $newBrandTitleFA;
         $this->view->newBrandTitleEN = $newBrandTitleEN;
-        $this->view->newBrandSRC = $newBrandSRC;
 
+        echo $this->view->render();
+    }
+
+    public function editingBrandAction($params = array())
+    {
+        $editingBrandId = $params['id'];
+
+        $this->view->editingBrandId = $editingBrandId;
+
+        $brands = (new BrandModel())->select(function (Select $select) {
+            $select->order('id ASC');
+        });
+        $this->view->brands = $brands;
+
+        echo $this->view->render();
+    }
+    public function editBrandAction($params = array())
+    {
+        $editingBrandId = $params['id'];
+        $newBrandTitleFA = $this->getRequest("title_fa");
+        $newBrandTitleEN = $this->getRequest("title_en");
+        $newBrandLogo = $this->getRequest("logo_src");
+
+        $this->view->editingBrandId = $editingBrandId;
+        $this->view->newBrandTitleFA = $newBrandTitleFA;
+        $this->view->newBrandTitleEN = $newBrandTitleEN;
+        $this->view->newBrandLogo = $newBrandLogo;
+
+        echo $this->view->render();
+    }
+
+    public function deletingBrandAction($params = array())
+    {
+        $deletingBrandId = $params['id'];
+        $this->view->deletingBrandId = $deletingBrandId;
+
+        echo $this->view->render();
+    }
+    public function removeBrandAction($params = array())
+    {
+        $deletingBrandId = $params['id'];
+        $this->view->deletingBrandId = $deletingBrandId;
 
         echo $this->view->render();
     }

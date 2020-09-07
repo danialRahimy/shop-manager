@@ -479,3 +479,37 @@ a.article:hover {
     max-width: 100px;
     max-height: 50px;
 }
+.showCheckIcon {
+    font-size: 20px;
+    padding-top: 4px;
+    color: #0f9f0f;
+    margin-right: 25%;
+}
+.hideIcon {
+    font-weight: 100;
+    color: #ff4b4b;
+    padding-top: 4px;
+    font-size: 17px;
+    margin-right: 25%;
+}
+
+.input-file {
+    visibility: hidden; position: absolute;
+}
+.input-group-addon {
+    padding: 6px 12px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1;
+    color: #555;
+    text-align: center;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 0 4px 4px 0;
+}
+.no-padding{
+    padding: 0;
+}
+.left-to-right{
+    direction: ltr;
+}

@@ -87,7 +87,7 @@ if($select['show_in_menu'] === 'Y') {
 
 $formElement[] = array(
     "type" => (new FormSubmitElement()),
-    "name" => "editCategory",
+    "name" => "editCategoryBtn",
     "attributes" => array(
         "value" => "بازگشت به فهرست دسته بندی",
         "class" => "d-block btn btn-secondary"

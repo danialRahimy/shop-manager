@@ -12,7 +12,7 @@ $select = $select[0];
 $allCats = $model->select();
 
 foreach ($allCats as $cat) {
-    if ($cat['id'] == $editingCategoryId) {
+    if ($cat['id'] == $deletingCategoryId) {
         $select = $cat;
     }
 }

@@ -46,7 +46,7 @@ $formElement[] = array(
 
 $formElement[] = array(
     "type" => (new FormSubmitElement()),
-    "name" => "editCategory",
+    "name" => "editColorBtn",
     "attributes" => array(
         "value" => "بازگشت به فهرست رنگ ها",
         "class" => "d-block btn btn-primary"

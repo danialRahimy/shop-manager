@@ -12,8 +12,8 @@ $formConfig = array(
     "attributes" => array(
         "method" => "post",
         "class" => "mb-2",
-        "action" => "/admin/adminProductManagement/editCategory?id=$editingCategoryId",
-        "name" => "editCategoryForm"
+        "action" => "/admin/adminProductManagement/editCategory/{$select['id']}",
+        "name" => "editingCategoryForm"
     )
 );
 
@@ -84,7 +84,7 @@ if($select['show_in_menu'] === 'Y') {
 
 $formElement[] = array(
     "type" => (new FormSubmitElement()),
-    "name" => "editCategory",
+    "name" => "editingCategoryBtn",
     "attributes" => array(
         "value" => "اعمال تغییرات",
         "class" => "d-block btn btn-primary"

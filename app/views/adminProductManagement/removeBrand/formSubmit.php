@@ -1,12 +1,18 @@
 <?php
 
 $dataId = array(
-    "id" => $deletingColorId
+    "id" => $deletingBrandId
 );
 
-$model = new ColorModel();
+$model = new BrandModel();
+
+$selectedBrand = $model->select($dataId);
+$selectedBrandSRC = $selectedBrand[0]['logo_src'];
+$selectedBrandDir = FILES_PATH.$selectedBrandSRC;
 
 $status = $model->delete($dataId);
+
+unlink($selectedBrandDir);
 
 if (!$status){
 

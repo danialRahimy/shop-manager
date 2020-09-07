@@ -22,7 +22,7 @@ class ValidatorEnglishLetters implements ValidatorInterface
             strpos("#", $this->input) !== 0 and
             strpos("#", $this->input) !== (strlen($this->input) -1)
         ){
-            if (preg_match("#^([a-zA-Z])+$#", $this->input))
+            if (preg_match("#^([a-zA-Z0-9 ])+$#", $this->input))
                 return $this->isValid = true;
         }
 

@@ -2,7 +2,7 @@
 
 $data = array(
     "title_fa" => $newBrandTitleFA,
-    "title_en" => $newBrandTitleEN,
+    "title_en" => $newBrandTitleEN
 );
 
 $model = new BrandModel();

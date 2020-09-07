@@ -10,21 +10,22 @@ $routes[] = array("admin/adminProductManagement/productList", "adminProductManag
 
 $routes[] = array("admin/adminProductManagement/categoriesList", "adminProductManagement", "categoriesList");
 $routes[] = array("admin/adminProductManagement/addCategory", "adminProductManagement", "addCategory");
-$routes[] = array("admin/adminProductManagement/selectCategoryForEdit", "adminProductManagement", "selectCategoryForEdit");
-$routes[] = array("admin/adminProductManagement/editCategory", "adminProductManagement", "editCategory");
-$routes[] = array("admin/adminProductManagement/deletingCategory", "adminProductManagement", "deletingCategory");
-$routes[] = array("admin/adminProductManagement/removeCategory", "adminProductManagement", "removeCategory");
+$routes[] = array("admin/adminProductManagement/editingCategory/{id}", "adminProductManagement", "editingCategory");
+$routes[] = array("admin/adminProductManagement/editCategory/{id}", "adminProductManagement", "editCategory");
+$routes[] = array("admin/adminProductManagement/deletingCategory/{id}", "adminProductManagement", "deletingCategory");
+$routes[] = array("admin/adminProductManagement/removeCategory/{id}", "adminProductManagement", "removeCategory");
+
 
 $routes[] = array("admin/adminProductManagement/colorsList", "adminProductManagement", "colorsList");
 $routes[] = array("admin/adminProductManagement/addColor", "adminProductManagement", "addColor");
-$routes[] = array("admin/adminProductManagement/editingColor", "adminProductManagement", "editingColor");
-$routes[] = array("admin/adminProductManagement/editColor", "adminProductManagement", "editColor");
-$routes[] = array("admin/adminProductManagement/deletingColor", "adminProductManagement", "deletingColor");
-$routes[] = array("admin/adminProductManagement/removeColor", "adminProductManagement", "removeColor");
+$routes[] = array("admin/adminProductManagement/editingColor/{id}", "adminProductManagement", "editingColor");
+$routes[] = array("admin/adminProductManagement/editColor/{id}", "adminProductManagement", "editColor");
+$routes[] = array("admin/adminProductManagement/deletingColor/{id}", "adminProductManagement", "deletingColor");
+$routes[] = array("admin/adminProductManagement/removeColor/{id}", "adminProductManagement", "removeColor");
 
 $routes[] = array("admin/adminProductManagement/brandsList", "adminProductManagement", "brandsList");
 $routes[] = array("admin/adminProductManagement/addBrand", "adminProductManagement", "addBrand");
-$routes[] = array("admin/adminProductManagement/editingBrand", "adminProductManagement", "editingBrand");
-$routes[] = array("admin/adminProductManagement/editBrand", "adminProductManagement", "editBrand");
-$routes[] = array("admin/adminProductManagement/deletingBrand", "adminProductManagement", "deletingBrand");
-$routes[] = array("admin/adminProductManagement/removeBrand", "adminProductManagement", "removeBrand");
+$routes[] = array("admin/adminProductManagement/editingBrand/{id}", "adminProductManagement", "editingBrand");
+$routes[] = array("admin/adminProductManagement/editBrand/{id}", "adminProductManagement", "editBrand");
+$routes[] = array("admin/adminProductManagement/deletingBrand/{id}", "adminProductManagement", "deletingBrand");
+$routes[] = array("admin/adminProductManagement/removeBrand/{id}", "adminProductManagement", "removeBrand");

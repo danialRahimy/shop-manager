@@ -27,10 +27,10 @@ if(!empty($childCats)) {
         $childCatsList .= "<li class='list-group-item'>
                                 <span>$title</span>
                                 <div class='float-left'>
-                                    <a class='admin-table-edit' href='/admin/adminProductManagement/selectCategoryForEdit?id=$id'>
+                                    <a class='admin-table-edit' href='/admin/adminProductManagement/editingCategory/$record[id]'>
                                         <i class='fa fa-edit'></i>
                                     </a>
-                                    <a class='admin-table-remove' href='/admin/adminProductManagement/deletingCategory?id=$id'>
+                                    <a class='admin-table-remove' href='/admin/adminProductManagement/deletingCategory/$record[id]'>
                                         <i class='fa fa-trash-o'></i>
                                     </a> 
                                 </div>

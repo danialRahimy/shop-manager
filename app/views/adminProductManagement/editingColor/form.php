@@ -10,8 +10,8 @@ $formConfig = array(
     "attributes" => array(
         "method" => "post",
         "class" => "mb-2",
-        "action" => "/admin/adminProductManagement/editColor?id=$editingColorId",
-        "name" => "editCategoryForm"
+        "action" => "/admin/adminProductManagement/editColor/$editingColorId",
+        "name" => "editingColorForm"
     )
 );
 
@@ -46,7 +46,7 @@ $formElement[] = array(
 
 $formElement[] = array(
     "type" => (new FormSubmitElement()),
-    "name" => "editCategory",
+    "name" => "editingColorBtn",
     "attributes" => array(
         "value" => "اعمال تغییرات",
         "class" => "d-block btn btn-primary"

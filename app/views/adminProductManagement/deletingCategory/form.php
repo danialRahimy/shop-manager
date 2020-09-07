@@ -10,8 +10,8 @@ $formConfig = array(
     "attributes" => array(
         "method" => "post",
         "class" => "mb-2",
-        "action" => "/admin/adminProductManagement/removeCategory?id=$deletingCategoryId",
-        "name" => "editCategoryForm"
+        "action" => "/admin/adminProductManagement/removeCategory/$deletingCategoryId",
+        "name" => "deletingCategoryForm"
     )
 );
 
@@ -86,7 +86,7 @@ if($select['show_in_menu'] === 'Y') {
 
 $formElement[] = array(
     "type" => (new FormSubmitElement()),
-    "name" => "editCategory",
+    "name" => "deletingCategoryBtn",
     "attributes" => array(
         "value" => "حذف دسته بندی",
         "class" => "d-block btn btn-danger"

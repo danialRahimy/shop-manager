@@ -71,7 +71,7 @@ $formElement[] = array(
 );
 $formElement[] = array(
     "type" => (new FormSubmitElement()),
-    "name" => "submitAddCategory",
+    "name" => "addCategoryBtn",
     "attributes" => array(
         "value" => "افزودن",
         "class" => "d-block btn btn-primary"
