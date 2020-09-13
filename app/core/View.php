@@ -3,6 +3,9 @@
 
 class View
 {
+    /**
+     * @param $t string
+     */
     private $controller;
     private $action;
     private $path;

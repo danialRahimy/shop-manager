@@ -513,3 +513,11 @@ a.article:hover {
 .left-to-right{
     direction: ltr;
 }
+
+/* START */ /* Editor --  --  */
+
+.se-toolbar {
+    direction: ltr;
+}
+
+/* END */ /* Editor --  --  */

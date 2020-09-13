@@ -12,5 +12,6 @@
 <script src="<?= STATIC_PATH ?>/js/lib/popper.min.js"></script>
 <script src="<?= STATIC_PATH ?>/js/lib/bootstrap.min.js"></script>
 <script src="<?= STATIC_PATH ?>/js/lib/sweetalert.min.js"></script>
+<script src="<?= STATIC_PATH ?>/js/lib/jquery.mask.min.js"></script>
 
 <script src="<?= STATIC_PATH ?>/js/admin-scripts.js"></script>

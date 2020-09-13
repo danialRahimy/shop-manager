@@ -5,14 +5,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
 
-    <link rel="stylesheet" href="<?= STATIC_PATH ?>/css/lib/bootstrap.min.css">
-    <link rel="stylesheet" href="<?= STATIC_PATH ?>/css/lib/font-awesome.min.css">
-    <link rel="stylesheet" href="<?= STATIC_PATH ?>/css/lib/owl.carousel.min.css">
-    <link rel="stylesheet" href="<?= STATIC_PATH ?>/css/lib/owl.theme.default.min.css">
-    <link rel="stylesheet" href="<?= STATIC_PATH ?>/css/fonts.css">
-
-    <!-- Our Custom CSS -->
-    <link rel="stylesheet" href="<?= STATIC_PATH ?>/css/admin-styles.css">
+    <?php require_once "meta.php"?>
 
     <title><?php echo $title = $title ?? "shop-manager";  ?></title>
 </head>

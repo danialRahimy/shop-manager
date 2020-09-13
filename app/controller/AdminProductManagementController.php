@@ -29,6 +29,7 @@ class AdminProductManagementController extends BaseController
         $this->view->newCategoryShowInMenu = $newCategoryShowInMenu;
 
         $categories = (new CategoryModel())->select(function (Select $select) {
+            $select->where(array("parent_id = ?" => "0"));
             $select->order('id ASC');
         });
         $this->view->categories = $categories;
@@ -49,6 +50,7 @@ class AdminProductManagementController extends BaseController
 
         echo $this->view->render();
     }
+
     public function editCategoryAction($params = array())
     {
         $editingCategoryId = $params['id'];
@@ -73,6 +75,7 @@ class AdminProductManagementController extends BaseController
 
         echo $this->view->render();
     }
+
     public function removeCategoryAction($params = array())
     {
         $deletingCategoryId = $params['id'];
@@ -85,8 +88,6 @@ class AdminProductManagementController extends BaseController
 
         echo $this->view->render();
     }
-
-
 
     public function colorsListAction()
     {
@@ -124,6 +125,7 @@ class AdminProductManagementController extends BaseController
 
         echo $this->view->render();
     }
+
     public function editColorAction($params = array())
     {
         $editingColorId = $params['id'];
@@ -144,6 +146,7 @@ class AdminProductManagementController extends BaseController
 
         echo $this->view->render();
     }
+
     public function removeColorAction($params = array())
     {
         $deletingColorId = $params['id'];
@@ -151,8 +154,6 @@ class AdminProductManagementController extends BaseController
 
         echo $this->view->render();
     }
-
-
 
     public function brandsListAction()
     {
@@ -190,6 +191,7 @@ class AdminProductManagementController extends BaseController
 
         echo $this->view->render();
     }
+
     public function editBrandAction($params = array())
     {
         $editingBrandId = $params['id'];
@@ -212,6 +214,7 @@ class AdminProductManagementController extends BaseController
 
         echo $this->view->render();
     }
+
     public function removeBrandAction($params = array())
     {
         $deletingBrandId = $params['id'];
@@ -219,7 +222,6 @@ class AdminProductManagementController extends BaseController
 
         echo $this->view->render();
     }
-
 
     public function productListAction()
     {
@@ -234,4 +236,27 @@ class AdminProductManagementController extends BaseController
         echo $this->view->render();
     }
 
+    public function addProductAction()
+    {
+        $categoryModel = new CategoryModel();
+        $categories = $categoryModel->select();
+
+        $brandModel = new BrandModel();
+        $brands = $brandModel->select();
+
+        $colorModel = new ColorModel();
+        $colors = $colorModel->select();
+
+        $this->view->pageID = "add-product";
+        $this->view->categories = $categories;
+        $this->view->brands = $brands;
+        $this->view->colors = $colors;
+
+        echo $this->view->render();
+    }
+
+    public function testAction()
+    {
+        echo $this->view->render();
+    }
 }

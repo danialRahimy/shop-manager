@@ -9,7 +9,6 @@
 -- Table 'admin_user'
 --
 -- ---
-START TRANSACTION
 DROP TABLE IF EXISTS `admin_user`;
 
 CREATE TABLE `admin_user` (
@@ -93,14 +92,14 @@ DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(250) NOT NULL,
+  `title_en` VARCHAR(250) DEFAULT NULL,
   `description` MEDIUMTEXT NULL DEFAULT NULL,
   `category_id` INTEGER NOT NULL,
---   `sub_category_id` INTEGER NOT NULL,
   `quantity` INTEGER NULL DEFAULT NULL,
   `buy_price` INTEGER NOT NULL,
   `sell_price` INTEGER NOT NULL,
   `brand_id` INTEGER NOT NULL,
-  `is_active` VARCHAR(1) NOT NULL DEFAULT 'N' COMMENT 'Y: yes, N: no',
+  `flags` VARCHAR(10) NOT NULL,
   `created_by` VARCHAR(50) NOT NULL,
   `created_at` INTEGER NOT NULL,
   PRIMARY KEY (`id`)
@@ -131,8 +130,8 @@ CREATE TABLE `product_image` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
   `product_id` INTEGER NOT NULL,
   `src` VARCHAR(250) NOT NULL,
-  `is_selected` MEDIUMTEXT(1) NOT NULL DEFAULT 'N' COMMENT 'Y: yes, N: no',
-  `is_active` VARCHAR(1) NOT NULL DEFAULT 'Y' COMMENT 'Y: yes, N: no',
+  `flags` VARCHAR(10) NOT NULL,
+  `alt` text DEFAULT NULL,
   `order` INTEGER NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 );
@@ -167,6 +166,7 @@ CREATE TABLE `product_comment` (
   `created_by` VARCHAR(50) NOT NULL,
   `created_at` INT NOT NULL,
   `like` VARCHAR(1) NOT NULL DEFAULT 'S' COMMENT 'Y: yes, N: no, S: not voited',
+  `flags` VARCHAR(10) DEFAULT 'N',
   PRIMARY KEY (`id`)
 );
 
@@ -377,29 +377,6 @@ CREATE TABLE `customer_product_favorite` (
 );
 
 -- ---
--- Foreign Keys
--- ---
-
-ALTER TABLE `admin_user` ADD FOREIGN KEY (role_id) REFERENCES `acl_role` (`id`);
-ALTER TABLE `acl_access` ADD FOREIGN KEY (role_id) REFERENCES `acl_role` (`id`);
-ALTER TABLE `product_category_sub` ADD FOREIGN KEY (category_id) REFERENCES `product_category` (`id`);
-ALTER TABLE `product` ADD FOREIGN KEY (category_id) REFERENCES `product_category` (`id`);
-ALTER TABLE `product` ADD FOREIGN KEY (sub_category_id) REFERENCES `product_category_sub` (`id`);
-ALTER TABLE `product` ADD FOREIGN KEY (brand_id) REFERENCES `product_brand` (`id`);
-ALTER TABLE `product_image` ADD FOREIGN KEY (product_id) REFERENCES `product` (`id`);
-ALTER TABLE `product_comment` ADD FOREIGN KEY (product_id) REFERENCES `product` (`id`);
-ALTER TABLE `product_stat` ADD FOREIGN KEY (id) REFERENCES `product` (`id`);
-ALTER TABLE `customer_basket` ADD FOREIGN KEY (product_id) REFERENCES `product` (`id`);
-ALTER TABLE `product_relation_color` ADD FOREIGN KEY (color_id) REFERENCES `product_color` (`id`);
-ALTER TABLE `product_relation_color` ADD FOREIGN KEY (product_id) REFERENCES `product` (`id`);
-ALTER TABLE `customer_factor` ADD FOREIGN KEY (address_id) REFERENCES `customer_address` (`id`);
-ALTER TABLE `customer_factor_details` ADD FOREIGN KEY (factor_id) REFERENCES `customer_factor` (`id`);
-ALTER TABLE `customer_factor_details` ADD FOREIGN KEY (product_id) REFERENCES `product` (`id`);
-ALTER TABLE `adv` ADD FOREIGN KEY (sec_id) REFERENCES `shop_section` (`id`);
-ALTER TABLE `shop_home_layout` ADD FOREIGN KEY (layout_section_id) REFERENCES `shop_home_layout_section` (`id`);
-ALTER TABLE `customer_product_favorite` ADD FOREIGN KEY (product_id) REFERENCES `product` (`id`);
-
--- ---
 -- Table Properties
 -- ---
 
@@ -407,7 +384,6 @@ ALTER TABLE `admin_user` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ALTER TABLE `acl_role` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ALTER TABLE `acl_access` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ALTER TABLE `product_category` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-ALTER TABLE `product_category_sub` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ALTER TABLE `product` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ALTER TABLE `product_color` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ALTER TABLE `product_image` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -427,55 +403,3 @@ ALTER TABLE `shop_home_layout_section` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLAT
 ALTER TABLE `shop_landing` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ALTER TABLE `customer_product_favorite` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-SET autocommit = {0 | 1}
-
--- ---
--- Test Data
--- ---
-
--- INSERT INTO `admin_user` (`id`,`username`,`password`,`email`,`cell_number`,`role_id`,`is_active`) VALUES
--- ('','','','','','','');
--- INSERT INTO `acl_role` (`id`,`title`) VALUES
--- ('','');
--- INSERT INTO `acl_access` (`id`,`role_id`,`plugin_id`,`access`) VALUES
--- ('','','','');
--- INSERT INTO `product_category` (`id`,`title`,`show_in_menu`,`description`) VALUES
--- ('','','','');
--- INSERT INTO `product_category_sub` (`id`,`title`,`category_id`,`show_in_menu`,`description`) VALUES
--- ('','','','','');
--- INSERT INTO `product` (`id`,`title`,`description`,`category_id`,`sub_category_id`,`quantity`,`buy_price`,`sell_price`,`brand_id`,`is_active`,`created_by`,`created_at`) VALUES
--- ('','','','','','','','','','','','');
--- INSERT INTO `product_color` (`id`,`hex_code`,`title`) VALUES
--- ('','','');
--- INSERT INTO `product_image` (`id`,`product_id`,`src`,`is_selected`,`is_active`,`order`) VALUES
--- ('','','','','','');
--- INSERT INTO `product_brand` (`id`,`logo_src`,`title_fa`,`title_en`) VALUES
--- ('','','','');
--- INSERT INTO `product_comment` (`id`,`product_id`,`comment`,`star`,`created_by`,`created_at`,`like`) VALUES
--- ('','','','','','','');
--- INSERT INTO `customer` (`id`,`username`,`email`,`cell_number`) VALUES
--- ('','','','');
--- INSERT INTO `product_stat` (`id`,`product_id`,`view`,`buy`,`reject`) VALUES
--- ('','','','','');
--- INSERT INTO `customer_address` (`id`,`customer`,`address`,`description`,`is_selected`,`receiver_name`,`receiver_cell_number`) VALUES
--- ('','','','','','','');
--- INSERT INTO `customer_basket` (`id`,`customer`,`product_id`,`meta`) VALUES
--- ('','','','');
--- INSERT INTO `product_relation_color` (`id`,`color_id`,`product_id`) VALUES
--- ('','','');
--- INSERT INTO `customer_factor` (`id`,`customer`,`payed`,`address_id`,`total`) VALUES
--- ('','','','','');
--- INSERT INTO `customer_factor_details` (`id`,`factor_id`,`product_id`,`product_details`) VALUES
--- ('','','','');
--- INSERT INTO `shop_section` (`id`,`sec_type`,`title`,`is_active`) VALUES
--- ('','','','');
--- INSERT INTO `adv` (`id`,`title`,`description`,`src`,`url`,`sec_id`,`is_active`,`order`) VALUES
--- ('','','','','','','','');
--- INSERT INTO `shop_home_layout` (`id`,`title`,`description`,`json_meta`,`is_active`,`layout_section_id`) VALUES
--- ('','','','','','');
--- INSERT INTO `shop_home_layout_section` (`id`,`title`,`description`,`img_scr`) VALUES
--- ('','','','');
--- INSERT INTO `shop_landing` (`id`,`url`,`title`,`description`,`is_active`,`show_in_menu`) VALUES
--- ('','','','','','');
--- INSERT INTO `customer_product_favorite` (`id`,`customer`,`product_id`) VALUES
--- ('','','');
