@@ -2,21 +2,21 @@
 
 use Form\Form;
 use Form\FormElement\FormCheckboxElement;
-use Form\FormElement\FormNumberElement;
 use Form\FormElement\FormSelectElement;
 use Form\FormElement\FormSubmitElement;
 use Form\FormElement\FormSunEditorElement;
-use Form\FormElement\FormTextareaElement;
 use Form\FormElement\FormTextElement;
 use Form\FormElement\FormFileElement;
 use Form\Validator\ValidatorEnglishLetters;
 use Form\Validator\ValidatorFarsiLetters;
+
 $formConfig = array(
     "attributes" => array(
         "method" => "post",
         "enctype" => "multipart/form-data",
         "class" => "mb-2",
-        "name" => "addBrandForm"
+        "action" => "/admin/adminProductManagement/addProduct",
+        "name" => "add-product-form"
     )
 );
 
@@ -39,15 +39,6 @@ foreach ($colors as $color) {
     $colorsOptions[$color['id']] = $color['title'];
 }
 
-$formConfig = array(
-    "attributes" => array(
-        "method" => "post",
-        "enctype" => "multipart/form-data",
-        "class" => "mb-2",
-        "action" => "/admin/adminProductManagement/addProduct",
-        "name" => "add-product-form"
-    )
-);
 
 $formElement = array();
 $formElement[] = array(
@@ -59,14 +50,12 @@ $formElement[] = array(
     ),
     "label" => array(
         "text" => "عنوان فارسی"
-    ),
-    "validator" => (new ValidatorFarsiLetters())
+    )
 );
 
 $formElement[] = array(
     "type" => (new FormTextElement()),
     "name" => "title-en",
-//    "required" => true,
     "attributes" => array(
         "class" => "form-control col-6 mb-3"
     ),
@@ -105,7 +94,6 @@ $formElement[] = array(
 $formElement[] = array(
     "type" => (new FormTextElement()),
     "name" => "alt-image",
-//    "required" => true,
     "attributes" => array(
         "class" => "form-control col-6 mb-3"
     ),
@@ -145,6 +133,7 @@ $formElement[] = array(
 $formElement[] = array(
     "type" => (new FormSelectElement()),
     "name" => "category",
+    //    "required" => true,
     "attributes" => array(
         "class" => "mb-3 form-control col-6"
     ),
@@ -157,6 +146,7 @@ $formElement[] = array(
 $formElement[] = array(
     "type" => (new FormSelectElement()),
     "name" => "sub-category",
+    //    "required" => true,
     "attributes" => array(
         "class" => "mb-3 form-control col-6"
     ),
@@ -201,7 +191,6 @@ $formElement[] = array(
         "text" => "توضیحات"
     ),
 );
-
 $formElement[] = array(
     "type" => (new FormCheckboxElement()),
     "name" => "publish",
@@ -231,4 +220,3 @@ $formElement[] = array(
 $form = new Form($formElement, $formConfig);
 
 echo $form->getForm();
-

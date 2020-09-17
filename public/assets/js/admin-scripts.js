@@ -29,6 +29,8 @@ $(document).ready(function () {
             var categoryId = $(this).val();
             var subCategories;
 
+            subCategories += `<option value='0'>-</option>`;
+
             for (i in categories){
 
                 if (categories[i].parent_id == categoryId){

@@ -21,7 +21,7 @@ $connection->beginTransaction();
 try {
 
     $contentManager = new Content();
-    $path = "/AdminProductManagementController";
+    $path = "/AdminProductManagementController/brand";
     $types = array(
         ".jpg", ".jpeg", ".jfif", ".pjpeg", ".pjp", ".png"
     );

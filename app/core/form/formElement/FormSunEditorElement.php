@@ -28,18 +28,19 @@ class FormSunEditorElement extends FormTextareaElement
         $this->dependency .= <<<HTML
             <script>
                 $(document).ready(function() {
-                    
-                    SUNEDITOR.create(document.querySelector('textarea[name="$name"]'), {
+                    var editor = SUNEDITOR.create(document.querySelector('textarea[name="$name"]'),
+                    {
+                        placeholder : 'توضیحات مورد نظر خود را اینجا وارد کنید.',
                         templates: [
-        {
-            name: 'Template-1',
-            html: '<p>HTML source1</p>'
-        },
-        {
-            name: 'Template-2',
-            html: '<p>HTML source2</p>'
-        }
-    ],
+                            {
+                                name: 'Template-1',
+                                html: '<p>HTML source1</p>'
+                            },
+                            {
+                                name: 'Template-2',
+                                html: '<p>HTML source2</p>'
+                            }
+                        ],
                         buttonList: [
                             ['undo', 'redo'],
                             ['fontSize', 'formatBlock'],
@@ -49,11 +50,13 @@ class FormSunEditorElement extends FormTextareaElement
                             ['removeFormat'],
                             ['outdent', 'indent'],
                             ['align', 'horizontalRule', 'list', 'lineHeight'],
-                            ['fullScreen', 'showBlocks', 'codeView', 'print'],
-                            
-                           
+                            ['fullScreen', 'showBlocks', 'codeView', 'print']
                         ]
                     });
+                    editor.onChange = function (contents, core) { 
+                        document.querySelector('textarea[name="$name"]').innerHTML = contents; 
+                    };
+
                 })
             </script>
         

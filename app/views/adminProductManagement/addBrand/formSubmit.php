@@ -19,11 +19,11 @@ if (is_array($select) and count($select) > 0){
     try {
 
         $contentManager = new Content();
-        $path = "/AdminProductManagementController";
+        $path = "/AdminProductManagementController/brand";
         $types = array(
             ".jpg", ".jpeg", ".jfif", ".pjpeg", ".pjp", ".png"
         );
-        $fileName = $contentManager->add("logo_src", $path, $types, 9999, Content::IMAGE);
+        $fileName = $contentManager->add("logo_src", $path, $types, 1024, Content::IMAGE);
         $data["logo_src"] = $fileName;
         $status = $model->insert($data);
         $connection->commit();

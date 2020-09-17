@@ -11,7 +11,8 @@ use Form\FormElement\FormTextareaElement;
 $options = array();
 $options[0] = '-';
 foreach ($categories as $category) {
-    $options[$category['id']] = $category['title'];
+    if ($category['parent_id'] == 0 )
+        $options[$category['id']] = $category['title'];
 }
 
 $formConfig = array(

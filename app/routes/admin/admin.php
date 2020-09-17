@@ -6,8 +6,6 @@ $routes[] = array("admin/panel", "admin", "panel");
 $routes[] = array("admin/adminUserManagement/roleList", "adminUserManagement", "roleList");
 $routes[] = array("admin/adminUserManagement/addRole", "adminUserManagement", "addRole");
 
-$routes[] = array("admin/adminProductManagement/productList", "adminProductManagement", "productList");
-
 // START // adminProductManagement Categories
 $routes[] = array("admin/adminProductManagement/categoriesList", "adminProductManagement", "categoriesList");
 $routes[] = array("admin/adminProductManagement/addCategory", "adminProductManagement", "addCategory");
@@ -35,9 +33,11 @@ $routes[] = array("admin/adminProductManagement/deletingBrand/{id}", "adminProdu
 $routes[] = array("admin/adminProductManagement/removeBrand/{id}", "adminProductManagement", "removeBrand");
 // END // adminProductManagement brandsList
 
-// START // adminProductManagement brandsList
+// START // adminProductManagement productsList
 $routes[] = array("admin/adminProductManagement/addProduct", "adminProductManagement", "addProduct");
-// END // adminProductManagement brandsList
+$routes[] = array("admin/adminProductManagement/productsList", "adminProductManagement", "productsList");
+
+// END // adminProductManagement productsList
 
 
 $routes[] = array("admin/adminProductManagement/test", "adminProductManagement", "test");

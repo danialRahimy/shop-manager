@@ -223,19 +223,6 @@ class AdminProductManagementController extends BaseController
         echo $this->view->render();
     }
 
-    public function productListAction()
-    {
-
-        $products = (new ProductModel())->select(function (Select $select) {
-            $select->order('id ASC');
-        });
-
-        $this->view->products = $products;
-        $this->view->pageID = "product-list";
-
-        echo $this->view->render();
-    }
-
     public function addProductAction()
     {
         $categoryModel = new CategoryModel();
@@ -251,6 +238,81 @@ class AdminProductManagementController extends BaseController
         $this->view->categories = $categories;
         $this->view->brands = $brands;
         $this->view->colors = $colors;
+
+        $newProductTitleFA = $this->getRequest("title-fa");
+        $newProductTitleEN = $this->getRequest("title-en");
+        $newProductAlt = $this->getRequest("alt-image");
+        if (empty($newProductAlt)) {
+            $newProductAlt = $newProductTitleFA . ' - ' . $newProductTitleEN;
+        }
+        $newProductSellPrice = $this->getRequest("sell-price");
+        $newProductQuantity = $this->getRequest("quantity");
+        $newProductCategory = $this->getRequest("category");
+        $newProductSubCategory = $this->getRequest("sub-category");
+        $newProductBrand = $this->getRequest("brand");
+        $newProductColor = $this->getRequest("color");
+        $newProductDescription = $this->getRequest("description");
+        $newProductPublish = $this->getRequest("publish");
+
+        $newProductSellPrice = str_replace(",", '', $newProductSellPrice);
+        $newProductQuantity = str_replace(",", '', $newProductQuantity);
+
+        $this->view->newProductTitleFA = $newProductTitleFA;
+        $this->view->newProductTitleEN = $newProductTitleEN;
+        $this->view->newProductAlt = $newProductAlt;
+        $this->view->newProductSellPrice = $newProductSellPrice;
+        $this->view->newProductQuantity = $newProductQuantity;
+        $this->view->newProductCategory = $newProductCategory;
+        $this->view->newProductSubCategory = $newProductSubCategory;
+        $this->view->newProductBrand = $newProductBrand;
+        $this->view->newProductColor = $newProductColor;
+        $this->view->newProductDescription = $newProductDescription;
+        $this->view->newProductPublish = $newProductPublish;
+
+        echo $this->view->render();
+    }
+
+    public function productsListAction()
+    {
+        $imageModel = new ProductImageModel();
+        $images = $imageModel->select();
+
+        $products = (new ProductModel())->select(function (Select $select) {
+            $select->order('id ASC');
+        });
+
+        $avatar = array();
+        $productImages = array();
+
+        $i = 0;
+        foreach($products as $product) {
+
+            $productId = $product['id'];
+            foreach ($images as $image) {
+                if($image['product_id'] == $productId){
+                    $productImages[$productId]['src'] = '/files' . $image['src'];
+                    $productImages[$productId]['alt'] = $image['alt'];
+                }
+            }
+
+            if($product['created_by'] == 'رسول بسامی') {
+                $avatar[$i] = '/files/images/avatar-1.jpg';
+            } else {
+                $avatar[$i] = '/files/images/avatar-2.jpg';
+            }
+
+            $dateArray = jgetdate($product['created_at']);
+            $farsiTime = $dateArray['year']."/".$dateArray['mon']."/".$dateArray['mday']." ".$dateArray['weekday']." ".$dateArray['hours'].":".$dateArray['minutes'];
+            $products[$i]['created_at'] = $farsiTime;
+
+            $i++;
+        };
+
+        $this->view->products = $products;
+        $this->view->avatar = $avatar;
+        $this->view->productImages = $productImages;
+
+        $this->view->pageID = "products-list";
 
         echo $this->view->render();
     }

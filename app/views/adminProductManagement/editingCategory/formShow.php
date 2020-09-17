@@ -11,7 +11,7 @@ $select = $select[0];
 $options = array();
 $options[0] = '-';
 foreach ($categories as $category) {
-    if($category['id'] != $editingCategoryId) {
+    if($category['id'] != $editingCategoryId && $category['parent_id'] == 0) {
         $options[$category['id']] = $category['title'];
     }
 }
