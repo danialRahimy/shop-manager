@@ -26,6 +26,7 @@ class Router
         $needToMatch = $routes;
 
         if (count($parts) < 1 and $this->isHome($this->routes)) {
+            echo "home";
             $part = "";
         } else {
             $part = $parts[$level];

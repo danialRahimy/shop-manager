@@ -1,3 +1,3 @@
 <?php
 
-$routes[] = array("a", "client", "index");
+$routes[] = array("home", "client", "index");

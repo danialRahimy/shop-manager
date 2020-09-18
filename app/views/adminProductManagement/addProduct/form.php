@@ -218,5 +218,3 @@ $formElement[] = array(
 );
 
 $form = new Form($formElement, $formConfig);
-
-echo $form->getForm();

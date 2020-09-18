@@ -16,7 +16,9 @@ $(document).ready(function () {
     });
 
     try {
-        $('[data-mask-price]').mask('000,000,000,000,000,000,000');
+        document.querySelector("[data-mask-price]").addEventListener("keyup",function (e) {
+            e.target.value = numeral(e.target.value).format('0,0');
+        });
     }catch (e) {
 
     }

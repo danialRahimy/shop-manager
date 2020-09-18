@@ -2,10 +2,12 @@
 
 trait Request
 {
-    public function getRequest(string $name) : string
+    public function getRequest(string $name, string $default = "") : string
     {
         if (isset($_REQUEST[$name])){
             return $this->safeInput($_REQUEST[$name]);
+        }elseif(!empty($default)){
+            return $this->safeInput($default);
         }
 
         return "";

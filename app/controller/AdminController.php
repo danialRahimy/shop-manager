@@ -6,12 +6,12 @@ class AdminController extends BaseController
     public function indexAction()
     {
         $this->view->test = "danial";
-        $this->view->render();
+        $this->view->render("admin");
     }
 
     public function loginAction()
     {
-        $this->view->render(false);
+        echo $this->view->render("adminLogin");
     }
 
     public function panelAction()

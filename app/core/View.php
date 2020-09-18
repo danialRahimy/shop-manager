@@ -27,15 +27,15 @@ class View
         $this->path = VIEW_PATH . "/$this->controller/$this->action/index.php";
     }
 
-    public function render($hasParent = true)
+    public function render($layout, $hasParent = true)
     {
         if ($hasParent)
-            $this->renderHasParent();
+            $this->renderHasParent($layout);
         else
             $this->renderNotParent();
     }
 
-    protected function renderHasParent()
+    protected function renderHasParent($layout)
     {
         $this->setPath();
 
@@ -43,10 +43,13 @@ class View
             $$variableName = $variableValue;
         }
         $contentPath = $this->path;
+
         if (file_exists($this->path)){
 
-//            require_once VIEW_PATH . "/index.php";
-            require_once VIEW_PATH . "/client.php";
+            if(file_exists(VIEW_PATH . "/$layout.php"))
+                require_once VIEW_PATH . "/$layout.php";
+            else
+                throw new ExceptionDev("layout $layout not found");
         }
     }
 

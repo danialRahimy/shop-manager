@@ -1,6 +1,13 @@
+truncate table `admin_user`;
+truncate table `product_brand`;
+truncate table `product_category`;
+truncate table `product_color`;
+truncate table `product`;
+truncate table `product_image`;
+truncate table `product_relation_color`;
+
 INSERT INTO `admin_user` (`id`, `username`, `password`, `email`, `cell_number`, `role_id`, `is_active`) VALUES
 (1, 'admin', '$2y$10$/.mCxRjZ2tcy7ISyNCoBoeiLHSUT0CcQTFzVc22.xEaIRsT2615Uy', 'admin@admin.com', NULL, 1, 'Y');
-COMMIT;
 
 INSERT INTO `product_brand` (`id`, `logo_src`, `title_fa`, `title_en`) VALUES
 (1, '/images/AdminProductManagementController/brand/1399/06/23/15507411285600.png', 'ای دیتا', 'adata'),

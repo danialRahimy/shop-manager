@@ -12,9 +12,9 @@ class AdminPager
     {
         if (count($pagerDetail)){
             $this->hasPager = true;
-            $this->count = $pagerDetail["count"];
-            $this->perPage = (array_key_exists("perPage", $pagerDetail)) ? $pagerDetail["perPage"] : 10;
-            $this->currentPage = (array_key_exists("currentPage", $pagerDetail)) ? $pagerDetail["currentPage"] : 1;
+            $this->count = (int) $pagerDetail["count"];
+            $this->perPage = (int) (array_key_exists("perPage", $pagerDetail)) ? $pagerDetail["perPage"] : 10;
+            $this->currentPage = (int) (array_key_exists("currentPage", $pagerDetail)) ? $pagerDetail["currentPage"] : 1;
         }
     }
 
@@ -38,8 +38,10 @@ class AdminPager
         if ($pos){
             $parameter = substr($uri, $pos);
 
-            $next = "$parameter&pageId=$nextNumber";
-            $previous = "$parameter&pageId=$previousNumber";
+            $parameter = preg_replace("/(&|)pageId=[0-9]*/", "", $parameter);
+
+            $next = "$parameter" . "&pageId=$nextNumber";
+            $previous = "$parameter" . "&pageId=$previousNumber";
         }
 
         if ($nextNumber > $allPage){

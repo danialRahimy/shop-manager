@@ -1,5 +1,7 @@
 <?php
 
+echo $pager;
+
 $selectedData = array(
     "id" => "آی دی",
     "title" => "نام محصول",
@@ -93,11 +95,12 @@ $selectedData = array(
             $productImageAlt= $productImages[$productId]['alt'];
 
             $productTitle = $products[$key]['title'];
-            $productSellPrice = $products[$key]['sell_price'];
-            $productDescription = $products[$key]['description'];
-            if(strlen($productDescription) > 100){
-                $productDescription = substr($productDescription, 0, 99).' ...';
-            }
+            $productSellPrice = number_format($products[$key]['sell_price']);
+            $productDescription = "";
+//            $productDescription = html_entity_decode($products[$key]['description']);
+//            if(strlen($productDescription) > 100){
+//                $productDescription = substr($productDescription, 0, 99).' ...';
+//            }
             $productPublishDate = $products[$key]['created_at'];
             $productPublishDate = $products[$key]['created_at'];
             $productPublishDate = $products[$key]['created_at'];

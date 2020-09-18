@@ -14,7 +14,7 @@ class AdminUserManagementController extends BaseController
         $this->view->roles = $roles;
         $this->view->pageID = "role-list";
 
-        echo $this->view->render();
+        echo $this->view->render("admin");
     }
 
     public function addRoleAction()
@@ -22,7 +22,7 @@ class AdminUserManagementController extends BaseController
         $newRoleTitle = $this->getRequest("title");
         $this->view->newRoleTitle = $newRoleTitle;
 
-        echo $this->view->render();
+        echo $this->view->render("admin");
     }
 
     public function editRoleAction()

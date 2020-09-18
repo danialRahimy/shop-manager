@@ -1,5 +1,6 @@
 <?php
 
+use Zend\Db\Sql\Expression;
 use Zend\Db\Sql\Select;
 
 class AdminProductManagementController extends BaseController
@@ -13,7 +14,7 @@ class AdminProductManagementController extends BaseController
         $this->view->categories = $categories;
         $this->view->pageID = "categories-list";
 
-        echo $this->view->render();
+        echo $this->view->render("admin");
     }
 
     public function addCategoryAction()
@@ -34,7 +35,7 @@ class AdminProductManagementController extends BaseController
         });
         $this->view->categories = $categories;
 
-        echo $this->view->render();
+        echo $this->view->render("admin");
     }
 
     public function editingCategoryAction($params = array())
@@ -48,7 +49,7 @@ class AdminProductManagementController extends BaseController
         });
         $this->view->categories = $categories;
 
-        echo $this->view->render();
+        echo $this->view->render("admin");
     }
 
     public function editCategoryAction($params = array())
@@ -65,7 +66,7 @@ class AdminProductManagementController extends BaseController
         $this->view->newCategoryDescription = $newCategoryDescription;
         $this->view->newCategoryShowInMenu = $newCategoryShowInMenu;
 
-        echo $this->view->render();
+        echo $this->view->render("admin");
     }
 
     public function deletingCategoryAction($params = array())
@@ -73,7 +74,7 @@ class AdminProductManagementController extends BaseController
         $deletingCategoryId = $params['id'];
         $this->view->deletingCategoryId = $deletingCategoryId;
 
-        echo $this->view->render();
+        echo $this->view->render("admin");
     }
 
     public function removeCategoryAction($params = array())
@@ -86,7 +87,7 @@ class AdminProductManagementController extends BaseController
         });
         $this->view->categories = $categories;
 
-        echo $this->view->render();
+        echo $this->view->render("admin");
     }
 
     public function colorsListAction()
@@ -98,7 +99,7 @@ class AdminProductManagementController extends BaseController
         $this->view->colors = $colors;
         $this->view->pageID = "colors-list";
 
-        echo $this->view->render();
+        echo $this->view->render("admin");
     }
 
     public function addColorAction()
@@ -109,7 +110,7 @@ class AdminProductManagementController extends BaseController
         $this->view->newColorTitle = $newColorTitle;
         $this->view->newColorHexCode = $newColorHexCode;
 
-        echo $this->view->render();
+        echo $this->view->render("admin");
     }
 
     public function editingColorAction($params = array())
@@ -123,7 +124,7 @@ class AdminProductManagementController extends BaseController
         });
         $this->view->colors = $colors;
 
-        echo $this->view->render();
+        echo $this->view->render("admin");
     }
 
     public function editColorAction($params = array())
@@ -136,7 +137,7 @@ class AdminProductManagementController extends BaseController
         $this->view->newColorTitle = $newColorTitle;
         $this->view->newColorHexCode = $newColorHexCode;
 
-        echo $this->view->render();
+        echo $this->view->render("admin");
     }
 
     public function deletingColorAction($params = array())
@@ -144,7 +145,7 @@ class AdminProductManagementController extends BaseController
         $deletingColorId = $params['id'];
         $this->view->deletingColorId = $deletingColorId;
 
-        echo $this->view->render();
+        echo $this->view->render("admin");
     }
 
     public function removeColorAction($params = array())
@@ -152,7 +153,7 @@ class AdminProductManagementController extends BaseController
         $deletingColorId = $params['id'];
         $this->view->deletingColorId = $deletingColorId;
 
-        echo $this->view->render();
+        echo $this->view->render("admin");
     }
 
     public function brandsListAction()
@@ -164,7 +165,7 @@ class AdminProductManagementController extends BaseController
         $this->view->brands = $brands;
         $this->view->pageID = "brands-list";
 
-        echo $this->view->render();
+        echo $this->view->render("admin");
     }
 
     public function addBrandAction()
@@ -175,7 +176,7 @@ class AdminProductManagementController extends BaseController
         $this->view->newBrandTitleFA = $newBrandTitleFA;
         $this->view->newBrandTitleEN = $newBrandTitleEN;
 
-        echo $this->view->render();
+        echo $this->view->render("admin");
     }
 
     public function editingBrandAction($params = array())
@@ -189,7 +190,7 @@ class AdminProductManagementController extends BaseController
         });
         $this->view->brands = $brands;
 
-        echo $this->view->render();
+        echo $this->view->render("admin");
     }
 
     public function editBrandAction($params = array())
@@ -204,7 +205,7 @@ class AdminProductManagementController extends BaseController
         $this->view->newBrandTitleEN = $newBrandTitleEN;
         $this->view->newBrandLogo = $newBrandLogo;
 
-        echo $this->view->render();
+        echo $this->view->render("admin");
     }
 
     public function deletingBrandAction($params = array())
@@ -212,7 +213,7 @@ class AdminProductManagementController extends BaseController
         $deletingBrandId = $params['id'];
         $this->view->deletingBrandId = $deletingBrandId;
 
-        echo $this->view->render();
+        echo $this->view->render("admin");
     }
 
     public function removeBrandAction($params = array())
@@ -220,7 +221,7 @@ class AdminProductManagementController extends BaseController
         $deletingBrandId = $params['id'];
         $this->view->deletingBrandId = $deletingBrandId;
 
-        echo $this->view->render();
+        echo $this->view->render("admin");
     }
 
     public function addProductAction()
@@ -269,17 +270,38 @@ class AdminProductManagementController extends BaseController
         $this->view->newProductDescription = $newProductDescription;
         $this->view->newProductPublish = $newProductPublish;
 
-        echo $this->view->render();
+        echo $this->view->render("admin");
     }
 
-    public function productsListAction()
+    public function productsListAction($params)
     {
         $imageModel = new ProductImageModel();
-        $images = $imageModel->select();
+        $ProductModel = new ProductModel();
 
-        $products = (new ProductModel())->select(function (Select $select) {
-            $select->order('id ASC');
-        });
+        $images = $imageModel->select();
+        $pageId = $this->getRequest("pageId", 1);
+        $perPage = 2;
+
+        $select = $ProductModel->getSql()->select();
+        $select->limit($perPage);
+        $select->offset(((((int) $pageId) - 1) * $perPage ));
+        $select->order('id DESC');
+
+        $productsResultSet = $ProductModel->selectWith($select);
+        $products = $productsResultSet->toArray();
+
+        $select = $ProductModel->getSql()->select();
+        $productCount = $select->columns(
+            array("count" => new Expression("COUNT(id)"))
+        );
+        $productCount = $ProductModel->selectWith($select);
+        $productCount = $productCount->toArray();
+
+        $pagerObj = new AdminPager(array(
+            "count" => $productCount[0]["count"],
+            "perPage" => $perPage,
+            "currentPage" => $pageId
+        ));
 
         $avatar = array();
         $productImages = array();
@@ -301,8 +323,7 @@ class AdminProductManagementController extends BaseController
                 $avatar[$i] = '/files/images/avatar-2.jpg';
             }
 
-            $dateArray = jgetdate($product['created_at']);
-            $farsiTime = $dateArray['year']."/".$dateArray['mon']."/".$dateArray['mday']." ".$dateArray['weekday']." ".$dateArray['hours'].":".$dateArray['minutes'];
+            $farsiTime = jdate("y/m/d l H:i", $product['created_at']);
             $products[$i]['created_at'] = $farsiTime;
 
             $i++;
@@ -311,14 +332,15 @@ class AdminProductManagementController extends BaseController
         $this->view->products = $products;
         $this->view->avatar = $avatar;
         $this->view->productImages = $productImages;
+        $this->view->pager = $pagerObj->getPager();
 
         $this->view->pageID = "products-list";
 
-        echo $this->view->render();
+        echo $this->view->render("admin");
     }
 
     public function testAction()
     {
-        echo $this->view->render();
+        echo $this->view->render("admin");
     }
 }

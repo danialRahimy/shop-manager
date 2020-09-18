@@ -7,6 +7,6 @@ class ErrorController extends BaseController
     {
         $this->view->title = "404 not found";
         $this->view->pageId = "not-found";
-        $this->view->render(false);
+        $this->view->render("adminLogin", false);
     }
 }
