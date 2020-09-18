@@ -44,7 +44,9 @@ class View
         }
         $contentPath = $this->path;
         if (file_exists($this->path)){
-            require_once VIEW_PATH . "/index.php";
+
+//            require_once VIEW_PATH . "/index.php";
+            require_once VIEW_PATH . "/client.php";
         }
     }
 
