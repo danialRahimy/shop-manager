@@ -280,7 +280,7 @@ class AdminProductManagementController extends BaseController
 
         $images = $imageModel->select();
         $pageId = $this->getRequest("pageId", 1);
-        $perPage = 2;
+        $perPage = 12;
 
         $select = $ProductModel->getSql()->select();
         $select->limit($perPage);

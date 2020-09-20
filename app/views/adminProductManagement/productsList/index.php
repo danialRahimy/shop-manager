@@ -1,7 +1,4 @@
 <?php
-
-echo $pager;
-
 $selectedData = array(
     "id" => "آی دی",
     "title" => "نام محصول",
@@ -204,3 +201,7 @@ HTML;
     ?>
 
 </section>
+
+<?php
+    echo $pager;
+?>

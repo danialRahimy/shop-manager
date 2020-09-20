@@ -59,11 +59,18 @@ a:focus {
     margin-right: 0;
     margin-left: 1rem;
 }
+
+.top-menu-categories li {
+    margin-left: 10px;
+}
 .navbar.navbar-dark form .md-form .form-control {
     color: #fff;
 }
 .navbar.navbar-dark form .md-form input {
     border-bottom: 1px solid #fff;
+}
+.dropdown-menu {
+    text-align: right;
 }
 .md-form input[type="text"]:not(.browser-default) {
     -webkit-box-sizing: content-box;
@@ -169,11 +176,10 @@ footer .footer-copyright {
     -webkit-box-shadow: 0 4px 10px 4px #e1e1e1;
     box-shadow: 0 4px 10px 4px #e1e1e1;
 }
-.selected-products-wrapper header h2 {
-    font-size: 20px;
-    color: #444;
+.category-title {
+    font: 18px/40px 'Vazir-Bold';
+    color: #616161;
     border-bottom: 1px solid #1de9b6;
-    line-height: 40px;
     display: inline-block;
     margin-bottom: 20px;
 }
@@ -238,6 +244,11 @@ footer .footer-copyright {
     background-color: rgba(255,255,255,0.1);
 }
 
+.card-title {
+    font-size: 16px;
+    line-height: 30px;
+    color: #424242;
+}
 .amber-text {
     color: #ffc107 !important;
 }
@@ -249,7 +260,8 @@ footer .footer-copyright {
     font-size: 11px;
 }
 .card-price {
-    font-size: 16px;
+    font-size: 20px;
+    color: #616161;
 }
 .card-price .badge{
     font-size: 11px;
@@ -290,24 +302,54 @@ footer .footer-copyright {
     display: flex;
     flex-direction: column-reverse;
     text-align: center;
+    color: #e1e1e1;
+    transition: color 300ms;
+    padding: 10px;
 }
 .card-operation span{
     font-size: 10px;
     padding-top: 3px;
 }
-.admin-table-chart {
-    color: #e1e1e1;;
+.bookmark-action {
     font-size: 18px;
-    padding: 10px;
 }
-.card:hover .admin-table-chart, .admin-table-chart:hover {
+.card:hover .bookmark-action, .bookmark-action:hover {
     color: #37c7e3;
 }
-.card:hover .admin-table-edit {
-    color: #1e45ea;
+.card:hover .share-action {
+    color: #37c7e3;
 }
-.card:hover .admin-table-remove {
-    color: #e34d4d;
+.buy-btn {
+    width: 120px;
+    opacity: 0.8;
 }
-
+.card:hover .buy-btn {
+    opacity: 1;
+}
+.buy-btn span {
+    background-color: #e34d4d;
+    color: #F5F5F5;
+    font: 16px/28px 'Vazir-Bold';
+    border-radius: 20px;
+    -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+    -webkit-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+}
+.buy-btn:hover span, .buy-btn:focus span, .buy-btn:active span{
+    color: #fff;
+    -webkit-box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18),0 4px 15px 0 rgba(0,0,0,0.15);
+}
 /************** end cards ******************/
+.pager-wrapper {
+    padding-bottom: 1px;
+}
+.categories-list {
+    margin: 0 auto 20px;
+}
+.categories-list a {
+    margin: 0 20px;
+}

@@ -21,39 +21,57 @@
             <a class="navbar-brand" href="#">برند فروشگاه</a>
 
             <!-- menu -->
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">مد و پوشاک
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">لوازم خانگی</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">دسته بندی</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">کالای دیجیتال
-                    </a>
-                    <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
-                        <a class="dropdown-item" href="#">گوشی موبایل</a>
-                        <a class="dropdown-item" href="#">لپ تاپ</a>
-                        <a class="dropdown-item" href="#">لوازم جانبی</a>
-                    </div>
-                </li>
+            <ul class="navbar-nav ml-auto top-menu-categories">
+                <?php
 
+                      foreach ($categories as $category) {
+
+                        $subCategories = $category['subCategories'];
+                        $categoryTitle = $category['title'];
+                        $categoryId = $category['id'];
+
+                        if(count($subCategories)) {
+
+                            $subCategoriesItems = '';
+                            foreach ($subCategories as $subCategory) {
+
+                                $id = $subCategory['id'];
+                                $title = $subCategory['title'];
+                                $subCategoriesItems .= "<a class='dropdown-item' href='{$id}'>{$title}</a>";
+                            }
+
+                            $listItem = <<<HTML
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-{$categoryId}" data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false">$categoryTitle
+                                </a>
+                                <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-{$categoryId}">
+                                    $subCategoriesItems
+                                </div>
+                            </li>
+HTML;
+                        } else {
+                            $listItem = <<<HTML
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">$categoryTitle</a>
+                                </li>
+HTML;
+                        }
+                        echo $listItem;
+                    }
+
+//                    print_r($categorySubmitted);
+                ?>
             </ul>
 
             <!-- search -->
-            <div class="col-4">
-                <form class="form-inline">
-                    <div class="md-form col-12 my-0">
-                        <input class="form-control white-placeholder mr-sm-2" type="text" placeholder="محصول دلخواهتو پیدا کن!" aria-label="Search">
-                    </div>
-                </form>
-            </div>
+<!--            <div class="col-4">-->
+<!--                <form class="form-inline">-->
+<!--                    <div class="md-form col-12 my-0">-->
+<!--                        <input class="form-control white-placeholder mr-sm-2" type="text" placeholder="محصول دلخواهتو پیدا کن!" aria-label="Search">-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
 
             <!-- user icons -->
             <ul class="navbar-nav mr-auto nav-flex-icons">
