@@ -291,4 +291,134 @@ class ClientController extends BaseController
         echo $this->view->render("client");
     }
 
+    public function productAction($params = array())
+    {
+        $productID = (int) $params['productID'];
+
+        //preparing categories data and their subCategories array
+        $CategoryModel = new CategoryModel();
+        $categoriesSet = $CategoryModel->getActiveCategory();
+
+        $i = 0;
+        $categories = array();
+        foreach ($categoriesSet as $category) {
+
+            if ($category['parent_id'] == 0) {
+
+                $categories[$i]['title'] = $category['title'];
+                $categories[$i]['id'] = $category['id'];
+
+                $thisCategoryAndItsChildIds = array();
+                $thisCategoryAndItsChildIds[] = $category['id'];
+                $subCategories = array();
+                $j = 0;
+                foreach ($categoriesSet as $category2) {
+
+                    if ($category2['parent_id'] == $categories[$i]['id']) {
+
+                        $subCategories[$j]['title'] = $category2['title'];
+                        $subCategories[$j]['id'] = $category2['id'];
+                        $thisCategoryAndItsChildIds[] = $category2['id'];
+                    }
+                    $j++;
+                }
+                $categories[$i]['subCategories'] = $subCategories;
+            }
+            $i++;
+        }
+
+        // fetch product data
+        $productModel = new ProductModel();
+
+        $select = $productModel->getSql()->select();
+        $select->where(array(TB_PRODUCT . ".id" => $productID));
+
+        $select->join(
+            array("CAT" => TB_PRODUCT_CATEGORIES),
+            TB_PRODUCT . ".category_id = CAT.id",
+            array(
+                "category_title" => "title"
+            ),
+            $select::JOIN_LEFT
+        );
+        $select->join(
+            array("B" => TB_PRODUCT_BRANDS),
+            TB_PRODUCT . ".brand_id = B.id",
+            array(
+                "brand_title" => "title_fa"
+            ),
+            $select::JOIN_LEFT
+        );
+        $select->join(
+            array("I" => TB_PRODUCT_IMAGE),
+            TB_PRODUCT . ".id = I.product_id",
+            array(
+                "img_src" => "src",
+                "img_alt" => "alt"
+            ),
+            $select::JOIN_LEFT
+        );
+        $select->join(
+            array("CR" => TB_PRODUCT_RELATION_COLORS),
+            TB_PRODUCT . ".id = CR.product_id",
+            "color_id",
+            $select::JOIN_LEFT
+        );
+        $select->join(
+            array("C" => TB_PRODUCT_COLORS),
+            "CR.color_id = C.id",
+            "hex_code",
+            $select::JOIN_LEFT
+        );
+//        echo $productModel->getSql()->buildSqlString($select);die();
+
+        $productsDetail= $productModel->selectWith($select);
+        $product = $productsDetail->toArray();
+
+
+        // fetch related products with this product
+        $categoryID = $product[0]['category_id'];
+        $categorySelect = $CategoryModel->getSql()->select();
+        $categorySelect->where(array("id" => $categoryID));
+
+        $select = $productModel->getSql()->select();
+
+        $select->join(
+            array("C" => $categorySelect),
+            TB_PRODUCT . ".category_id = C.id",
+            array(
+                "category_id" => "id",
+                "category_title" => "title"
+            ),
+            $select::JOIN_INNER
+        );
+
+        $select->join(
+            array("I" => TB_PRODUCT_IMAGE),
+            TB_PRODUCT . ".id = I.product_id",
+            array(
+                "img_src" => "src",
+                "img_alt" => "alt"
+            ),
+            $select::JOIN_LEFT
+        );
+
+        $select->limit(4);
+        $select->order('id DESC');
+
+        $relatedProductsResultSet = $productModel->selectWith($select);
+        $relatedProducts = $relatedProductsResultSet->toArray();
+
+        //sending data to view
+        $this->view->categoryID = $categoryID;
+        $this->view->categoryName = $product[0]['category_title'];
+        $this->view->categories = $categories;
+        $this->view->product = $product[0];
+        $this->view->relatedProducts = $relatedProducts;
+
+        $this->view->pageID = "product" . $productID;
+        $this->view->title = $product[0]['category_title'] . " - برند فروشگاه";
+        echo $this->view->render("client");
+    }
+
 }

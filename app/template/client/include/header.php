@@ -18,7 +18,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark default-color">
 
             <!-- Navbar brand -->
-            <a class="navbar-brand" href="#">برند فروشگاه</a>
+            <a class="navbar-brand" href="/home">برند فروشگاه</a>
 
             <!-- menu -->
             <ul class="navbar-nav ml-auto top-menu-categories">
@@ -37,7 +37,7 @@
 
                                 $id = $subCategory['id'];
                                 $title = $subCategory['title'];
-                                $subCategoriesItems .= "<a class='dropdown-item' href='{$id}'>{$title}</a>";
+                                $subCategoriesItems .= "<a class='dropdown-item' href='/category/{$categoryId}/{$id}'>{$title}</a>";
                             }
 
                             $listItem = <<<HTML
@@ -53,7 +53,7 @@ HTML;
                         } else {
                             $listItem = <<<HTML
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">$categoryTitle</a>
+                                    <a class="nav-link" href="/category/{$categoryId}">$categoryTitle</a>
                                 </li>
 HTML;
                         }

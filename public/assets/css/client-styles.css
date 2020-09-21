@@ -353,3 +353,72 @@ footer .footer-copyright {
 .categories-list a {
     margin: 0 20px;
 }
+
+
+/************* product page ****************/
+.product-actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.product-actions a{
+    margin: 15px auto;
+    text-align: center;
+    color: #5a6268;
+}
+.product-actions span {
+    font-size: 10px;
+    line-height: 14px;
+    display: inline-block;
+}
+
+.product-title {
+    font: 26px/48px 'Vazir-bold';
+}
+.product-title-en {
+    font: 18px/30px 'Vazir';
+    color: #616161;
+    text-align: left;
+    border-top: 1px solid #EEEEEE;
+    padding-top: 6px;
+    margin-bottom: 20px;
+}
+.cat-and-brand, .product-statics, .product-colors {
+    display: flex;
+    font-size: 14px;
+    color: #616161;
+    margin: 16px 0;
+}
+.cat-and-brand > div , .product-statics .statics-item{
+    margin-left: 40px;
+}
+.cat-and-brand > div:last-child , .product-statics .statics-item:last-child {
+    margin-left: 0;
+}
+.cat-and-brand a {
+    font-size: 16px;
+    color: #009688;
+}
+.color {
+    width: 70px;
+    height: 30px;
+    display: block;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+.product-colors .color-label {
+    padding-top: 6px;
+}
+.product-price {
+    font-size: 24px;
+    color: #e97171;
+}
+.price-label {
+    font-size: 18px;
+    color: #616161;
+}
+.product-description {
+    margin-top: 40px;
+    padding: 10px 20px;
+    text-align: justify;
+}

@@ -1,7 +1,7 @@
 <section class="selected-products-wrapper pb-0">
 
     <header>
-        <h2 class="category-title"><a href="<?= $categoryID ?>"><?= $categoryName ?></a></h2>
+        <h2 class="category-title"><a href="/category/<?= $categoryID ?>"><?= $categoryName ?></a></h2>
     </header>
 
 
@@ -18,7 +18,7 @@
                 $subCatId = $sub['id'];
                 $subCatTitle = $sub['title'];
 
-                $subcategoriesHtml .= "<a class='buy-btn' href='$subCatId'><span class='btn'>$subCatTitle</span></a>";
+                $subcategoriesHtml .= "<a class='buy-btn' href='/category/$categoryID/$subCatId'><span class='btn'>$subCatTitle</span></a>";
             }
             echo $subcategoriesHtml .="</div>";
         } else {
@@ -40,7 +40,7 @@
                     <!-- Card image -->
                     <div class="view overlay">
                         <img class="card-img-top rounded-0" src="$productImage" alt="$productImageAlt">
-                        <a href="#!">
+                        <a href="/product/$productId">
                             <div class="mask rgba-white-slight"></div>
                         </a>
                     </div>
@@ -51,7 +51,7 @@ HTML;
                     <div class="card-body">
         
                         <!-- Title -->
-                        <h3 class="card-title font-weight-bold"><a href="#">$productTitle</a></h3>
+                        <h3 class="card-title font-weight-bold"><a href="/product/$productId">$productTitle</a></h3>
                         <!-- Data -->
                         <ul class="list-unstyled list-inline left-to-right rating mb-0">
                             <li class="list-inline-item mr-0"><i class="fa fa-star amber-text"></i></li>
@@ -89,14 +89,14 @@ HTML;
 HTML;
 
             $product["operation"] = "
-                    <a class='bookmark-action' href='/admin/adminProductManagement/editingBrand/$productId'>
+                    <a class='bookmark-action' href='/bookmark/$productId'>
                         <span>علاقه مندی</span>
                         <i class='fa fa-bookmark-o'></i>
                     </a>
-                    <a class='buy-btn' href='/admin/adminProductManagement/editingBrand/$productId'>
+                    <a class='buy-btn' href='/add-to-cart/$productId'>
                         <span class='btn'>خرید</span>
                     </a>
-                    <a class='share-action' href='/admin/adminProductManagement/deletingBrand/$productId'>
+                    <a class='share-action' href='/product/$productId'>
                         <span>اشتراک</span>
                         <i class='fa fa-share-alt'></i>
                     </a> 

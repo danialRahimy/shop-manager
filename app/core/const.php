@@ -19,6 +19,6 @@ define("TB_ADMIN_ROLE", "acl_role");
 define("TB_PRODUCT", "product");
 define("TB_PRODUCT_CATEGORIES", "product_category");
 define("TB_PRODUCT_COLORS", "product_color");
-define("TB_PRODUCT_relation_COLORS", "product_relation_color");
+define("TB_PRODUCT_RELATION_COLORS", "product_relation_color");
 define("TB_PRODUCT_BRANDS", "product_brand");
 define("TB_PRODUCT_IMAGE", "product_image");
