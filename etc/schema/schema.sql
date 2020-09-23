@@ -179,9 +179,12 @@ DROP TABLE IF EXISTS `customer`;
 
 CREATE TABLE `customer` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `family` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
   `username` VARCHAR(50) NOT NULL,
-  `email` VARCHAR(50) NOT NULL,
+  `email` VARCHAR(50) DEFAULT NULL,
   `cell_number` VARCHAR(11) NOT NULL,
+  `password` MEDIUMTEXT NOT NULL,
   PRIMARY KEY (`id`)
 );
 
@@ -402,4 +405,3 @@ ALTER TABLE `shop_home_layout` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_b
 ALTER TABLE `shop_home_layout_section` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ALTER TABLE `shop_landing` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ALTER TABLE `customer_product_favorite` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-

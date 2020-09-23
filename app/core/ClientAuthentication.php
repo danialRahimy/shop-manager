@@ -1,23 +1,22 @@
 <?php
 
-class Authentication
+class ClientAuthentication
 {
     public function login($usernameOREmail, $password)
     {
-        $adminUserModel = new AdminUserModel();
-        $result = $adminUserModel->selectUserByEmailOrUsername($usernameOREmail);
-
-        $hashFromDB = $result[0]["password"];
-        $resultMatch = password_verify($password, $hashFromDB);
+        $customerModel = new CustomerModel();
+        $result = $customerModel->selectUserByEmailOrUsername($usernameOREmail);
 
         if (empty($result)) {
+            throw new ExceptionUser("کاربری با این نام کاربری یا ایمیل وجود ندارد، لطفا به صفحه ثبت نام در سایت مراجعه نمایید.");
 
-            throw new ExceptionUser("کاربری با این نام کاربری یاایمیل وجود ندارد.");
         } else {
+            $hashFromDB = $result[0]["password"];
+            $resultMatch = password_verify($password, $hashFromDB);
 
             if ($resultMatch){
-                if (!array_key_exists("admin", $_SESSION)){
-                    $_SESSION["admin"] = array(
+                if (!array_key_exists("users", $_SESSION)){
+                    $_SESSION["users"] = array(
                         "user" => array(
                             "username" => $result[0]["username"],
                             "isValid" => true,
@@ -30,7 +29,7 @@ class Authentication
                         "isValid" => true,
                     );
                 }
-                header("Location: " . SUB_DIRECTORY . "/admin/panel");
+                header("Location: " . SUB_DIRECTORY . "/home");
             }else{
                 throw new ExceptionUser("نام کابری یا رمز عبور صحیح نیست");
             }
@@ -40,8 +39,8 @@ class Authentication
     public function isValid()
     {
         if (
-            isset($_SESSION["admin"]["user"]["isValid"]) and
-            $_SESSION["admin"]["user"]["isValid"]
+            isset($_SESSION["users"]["user"]["isValid"]) and
+            $_SESSION["users"]["user"]["isValid"]
         )
             return true;
 

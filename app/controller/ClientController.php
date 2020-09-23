@@ -421,4 +421,40 @@ class ClientController extends BaseController
         echo $this->view->render("client");
     }
 
+    public function loginRegisterFormsAction()
+    {
+        $this->view->pageID = "login-register";
+        $this->view->title = "ورود به سایت یا ثبت نام - برند فروشگاه";
+        echo $this->view->render("client", false);
+    }
+
+    public function loginAction()
+    {
+        $this->view->pageID = "login";
+        $this->view->title = "ورود به سایت - برند فروشگاه";
+        echo $this->view->render("client", false);
+    }
+
+    public function registerAction()
+    {
+        $customerName = $this->getRequest("name");
+        $customerFamily = $this->getRequest("family");
+        $customerUsername = $this->getRequest("username");
+        $customerEmail = $this->getRequest("email");
+        $customerPhone = $this->getRequest("tel");
+        $customerPassword = $this->getRequest("password");
+
+        $customerHashedPassword= password_hash($customerPassword, PASSWORD_BCRYPT);
+
+        $this->view->customerName = $customerName;
+        $this->view->customerFamily = $customerFamily;
+        $this->view->customerUsername = $customerUsername;
+        $this->view->customerEmail = $customerEmail;
+        $this->view->customerPhone = $customerPhone;
+        $this->view->customerHashedPassword = $customerHashedPassword;
+
+        $this->view->pageID = "register";
+        $this->view->title = "ثبت نام در سایت - برند فروشگاه";
+        echo $this->view->render("client", false);
+    }
 }

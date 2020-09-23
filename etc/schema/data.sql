@@ -9,6 +9,9 @@ truncate table `product_relation_color`;
 INSERT INTO `admin_user` (`id`, `username`, `password`, `email`, `cell_number`, `role_id`, `is_active`) VALUES
 (1, 'admin', '$2y$10$/.mCxRjZ2tcy7ISyNCoBoeiLHSUT0CcQTFzVc22.xEaIRsT2615Uy', 'admin@admin.com', NULL, 1, 'Y');
 
+INSERT INTO `customer` (`id`, `name`, `family`, `username`, `email`, `cell_number`, `password`) VALUES
+(1, 'کاربر', 'تستی', 'user', 'user@gmail.com', '09129121122', '$2y$10$qhep6MZTAidXuhVfZ3tpiOPoUXx08YLBjI3QxThTbjgFflkCqygAi');
+
 INSERT INTO `product_brand` (`id`, `logo_src`, `title_fa`, `title_en`) VALUES
 (1, '/images/AdminProductManagementController/brand/1399/06/23/15507411285600.png', 'ای دیتا', 'adata'),
 (2, '/images/AdminProductManagementController/brand/1399/06/23/15361809397810.png', 'سامسونگ', 'samsung'),
