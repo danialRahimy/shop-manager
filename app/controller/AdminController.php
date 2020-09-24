@@ -14,13 +14,14 @@ class AdminController extends BaseController
         echo $this->view->render("adminLogin");
     }
 
-    public function panelAction()
+    public function logoutAction()
     {
-        echo 123;
+        (new Authentication())->logout();
+        echo $this->view->render("adminLogin");
     }
 
-    public function testAction()
+    public function panelAction()
     {
-        echo "test";
+        echo $this->view->render("admin");
     }
 }

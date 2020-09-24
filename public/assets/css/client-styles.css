@@ -311,6 +311,7 @@ footer .footer-copyright {
     padding-top: 3px;
 }
 .bookmark-action {
+    cursor: pointer;
     font-size: 18px;
 }
 .card:hover .bookmark-action, .bookmark-action:hover {

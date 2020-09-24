@@ -37,6 +37,12 @@ class Authentication
         }
     }
 
+    public function logout()
+    {
+        $_SESSION["admin"] = array();
+        header("Location: " . SUB_DIRECTORY . "/admin/login");
+    }
+
     public function isValid()
     {
         if (

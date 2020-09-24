@@ -46,7 +46,7 @@ class DispatcherManual extends Dispatcher
 
         if (method_exists($controllerObj, $action)) {
             $params = $this->setParams();
-            $controllerObj->$action($params);
+            echo $controllerObj->$action($params);
         } else {
             echo "Action Doesn't Exist <br>";
             $this->pageNotFound();

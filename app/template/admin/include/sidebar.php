@@ -11,70 +11,35 @@ $sidebarArray = array(
         "plugin-fa" => "محصولات",
         "plugin-icon" => "fa-cart-arrow-down",
         "actions" => array(
-            "product-list" => "لیست محصولات",
-            "submit-product" => "ثبت محصول جدید",
-            "categories" => "دسته بندی ها",
-            "brand" => "برندها",
-            "copen" => "کوپن ها"
+            "/admin/adminProductManagement/productsList" => "لیست محصولات",
+            "/admin/adminProductManagement/addProduct" => "ثبت محصول جدید",
         )
     ),
     array(
-        "plugin-en" => "order",
-        "plugin-fa" => "سفارشات",
-        "plugin-icon" => "fa-tachometer",
+        "plugin-en" => "category",
+        "plugin-fa" => "موضوعات",
+        "plugin-icon" => "fa-cart-arrow-down",
         "actions" => array(
-            "history" => "تاریخچه صفارشات",
-            "reject" => "درخواست مرجوعی"
+            "/admin/adminProductManagement/categoriesList" => "لیست موضوعات",
+            "/admin/adminProductManagement/addCategory" => "ثبت موضوع جدید",
         )
     ),
     array(
-        "plugin-en" => "statics",
-        "plugin-fa" => "گزارش عملکرد",
-        "plugin-icon" => "fa-line-chart"
-    ),
-    array(
-        "plugin-en" => "userManagement",
-        "plugin-fa" => "مدیریت کاربران",
-        "plugin-icon" => "fa-users",
+        "plugin-en" => "color",
+        "plugin-fa" => "رنگ ها",
+        "plugin-icon" => "fa-cart-arrow-down",
         "actions" => array(
-            "special" => "مشتریان ویژه",
-            "new-customer" => "مشتریان جدید",
-            "new-user" => "کاربران جدید",
-            "send-email" => "ارسال ایمیل"
+            "/admin/adminProductManagement/colorsList" => "لیست رنگ ها",
+            "/admin/adminProductManagement/addColor" => "ثبت رنگ جدید",
         )
     ),
     array(
-        "plugin-en" => "dashboard",
-        "plugin-fa" => "داشبورد",
-        "plugin-icon" => "fa-tachometer",
+        "plugin-en" => "brand",
+        "plugin-fa" => "برند ها",
+        "plugin-icon" => "fa-cart-arrow-down",
         "actions" => array(
-
-        )
-    ),
-    array(
-        "plugin-en" => "commentManagement",
-        "plugin-fa" => "مدیریت نظرات",
-        "plugin-icon" => "fa-comments-o"
-    ),
-    array(
-        "plugin-en" => "customerService",
-        "plugin-fa" => "پشتیبانی",
-        "plugin-icon" => "fa-volume-control-phone reflectTransform"
-    ),
-    array(
-        "plugin-en" => "teammate",
-        "plugin-fa" => "همکاران",
-        "plugin-icon" => "fa-handshake-o"
-    ),
-    array(
-        "plugin-en" => "sitting",
-        "plugin-fa" => "تنظیمات سایت",
-        "plugin-icon" => "fa-cog",
-        "actions" => array(
-            "layout" => "تنظیمات قالب",
-            "section" => "تنظیمات قسمت ها",
-            "adv" => "تبلیغات",
-            "pageManagement" => "مدیریت برگه ها"
+            "/admin/adminProductManagement/brandsList" => "لیست برند ها",
+            "/admin/adminProductManagement/addBrand" => "ثبت برند جدید",
         )
     )
 );
@@ -96,9 +61,9 @@ $sidebarArray = array(
                         <?php echo $pluginArray['plugin-fa']; ?>
                     </a>
                     <ul class="collapse list-unstyled" id="<?php echo $pluginArray['plugin-en']; ?>SubMenu">
-                        <?php foreach ($pluginArray['actions'] as $action) { ?>
+                        <?php foreach ($pluginArray['actions'] as $url => $action) { ?>
                             <li>
-                                <a href="#"><?php echo $action; ?></a>
+                                <a href="<?= $url ?>"><?php echo $action; ?></a>
                             </li>
                         <?php } ?>
                     </ul>
@@ -115,10 +80,10 @@ $sidebarArray = array(
 
     <ul class="list-unstyled CTAs">
         <li>
-            <a class="copyright" href="#">نمایش سایت</a>
+            <a class="copyright" href="/">نمایش سایت</a>
         </li>
         <li>
-            <a href="#">
+            <a href="/admin/logout">
                 <i class="fa fa-sign-out" aria-hidden="true"></i>
                 خروج
             </a>

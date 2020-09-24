@@ -24,4 +24,9 @@ class BaseModel extends TableGateway
         $result = parent::select($where);
         return $result->toArray();
     }
+
+    public function getConnection()
+    {
+        return $this->getSql()->getAdapter()->getDriver()->getConnection();
+    }
 }

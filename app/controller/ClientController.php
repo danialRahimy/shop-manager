@@ -9,6 +9,8 @@ class ClientController extends BaseController
         $productModel = new ProductModel();
         $select = $productModel->getSql()->select();
 
+        $username = (new ClientAuthentication())->getUsername();
+
         $categorySelect = (new CategoryModel())->getSql()->select();
         $categorySelect->where(array("show_in_menu" => "Y"));
 
@@ -31,6 +33,31 @@ class ClientController extends BaseController
             ),
             $select::JOIN_LEFT
         );
+
+        $select->join(
+            array("F" => TB_CUSTOMER_PRODUCT_FAVORITE),
+            new \Zend\Db\Sql\Predicate\Expression(
+                TB_PRODUCT . ".id = F.product_id AND F.customer = '$username'"
+            ),
+            array(
+                "is_favorite" => "customer",
+            ),
+            $select::JOIN_LEFT
+        );
+
+        $select->join(
+            array("STAT" => TB_PRODUCT_STAT),
+            TB_PRODUCT . ".id = STAT.product_id",
+            array(
+                "stat_view" => "view",
+                "stat_buy" => "buy",
+                "stat_like" => "like",
+            ),
+            $select::JOIN_LEFT
+        );
+
+        $select->group("id");
+        $select->order("id");
 
         $productsResultSet = $productModel->selectWith($select);
         $products = $productsResultSet->toArray();
@@ -84,6 +111,8 @@ class ClientController extends BaseController
     public function categoryAction($params = array())
     {
         $categoryID = (int) $params['catID'];
+
+        $username = (new ClientAuthentication())->getUsername();
 
         //preparing categories data and their subCategories array
         $categoriesSet = (new CategoryModel())->getActiveCategory();
@@ -159,6 +188,28 @@ class ClientController extends BaseController
             $select::JOIN_LEFT
         );
 
+        $select->join(
+            array("F" => TB_CUSTOMER_PRODUCT_FAVORITE),
+            new \Zend\Db\Sql\Predicate\Expression(
+                TB_PRODUCT . ".id = F.product_id AND F.customer = '$username'"
+            ),
+            array(
+                "is_favorite" => "customer",
+            ),
+            $select::JOIN_LEFT
+        );
+
+        $select->join(
+            array("STAT" => TB_PRODUCT_STAT),
+            TB_PRODUCT . ".id = STAT.product_id",
+            array(
+                "stat_view" => "view",
+                "stat_buy" => "buy",
+                "stat_like" => "like",
+            ),
+            $select::JOIN_LEFT
+        );
+
         $select->limit($perPage);
         $select->offset(((((int) $pageId) - 1) * $perPage ));
         $select->order('id DESC');
@@ -185,6 +236,7 @@ class ClientController extends BaseController
     {
         $categoryId = (int) $params['catID'];
         $subCategoryId = (int) $params['subCatID'];
+        $username = (new ClientAuthentication())->getUsername();
 
         $categoriesSet = (new CategoryModel())->getActiveCategory();
 
@@ -268,6 +320,28 @@ class ClientController extends BaseController
             $select::JOIN_LEFT
         );
 
+        $select->join(
+            array("F" => TB_CUSTOMER_PRODUCT_FAVORITE),
+            new \Zend\Db\Sql\Predicate\Expression(
+                TB_PRODUCT . ".id = F.product_id AND F.customer = '$username'"
+            ),
+            array(
+                "is_favorite" => "customer",
+            ),
+            $select::JOIN_LEFT
+        );
+
+        $select->join(
+            array("STAT" => TB_PRODUCT_STAT),
+            TB_PRODUCT . ".id = STAT.product_id",
+            array(
+                "stat_view" => "view",
+                "stat_buy" => "buy",
+                "stat_like" => "like",
+            ),
+            $select::JOIN_LEFT
+        );
+
         // limit products with page number
         $select->limit($perPage);
         $select->offset(((((int) $pageId) - 1) * $perPage ));
@@ -294,6 +368,9 @@ class ClientController extends BaseController
     public function productAction($params = array())
     {
         $productID = (int) $params['productID'];
+        $username = (new ClientAuthentication())->getUsername();
+
+        (new ProductStatModel())->plusView($productID);
 
         //preparing categories data and their subCategories array
         $CategoryModel = new CategoryModel();
@@ -370,7 +447,26 @@ class ClientController extends BaseController
             "hex_code",
             $select::JOIN_LEFT
         );
-//        echo $productModel->getSql()->buildSqlString($select);die();
+        $select->join(
+            array("F" => TB_CUSTOMER_PRODUCT_FAVORITE),
+            new \Zend\Db\Sql\Predicate\Expression(
+                TB_PRODUCT . ".id = F.product_id AND F.customer = '$username'"
+            ),
+            array(
+                "is_favorite" => "customer",
+            ),
+            $select::JOIN_LEFT
+        );
+        $select->join(
+            array("STAT" => TB_PRODUCT_STAT),
+            TB_PRODUCT . ".id = STAT.product_id",
+            array(
+                "stat_view" => "view",
+                "stat_buy" => "buy",
+                "stat_like" => "like",
+            ),
+            $select::JOIN_LEFT
+        );
 
         $productsDetail= $productModel->selectWith($select);
         $product = $productsDetail->toArray();
@@ -399,6 +495,28 @@ class ClientController extends BaseController
             array(
                 "img_src" => "src",
                 "img_alt" => "alt"
+            ),
+            $select::JOIN_LEFT
+        );
+
+        $select->join(
+            array("F" => TB_CUSTOMER_PRODUCT_FAVORITE),
+            new \Zend\Db\Sql\Predicate\Expression(
+                TB_PRODUCT . ".id = F.product_id AND F.customer = '$username'"
+            ),
+            array(
+                "is_favorite" => "customer",
+            ),
+            $select::JOIN_LEFT
+        );
+
+        $select->join(
+            array("STAT" => TB_PRODUCT_STAT),
+            TB_PRODUCT . ".id = STAT.product_id",
+            array(
+                "stat_view" => "view",
+                "stat_buy" => "buy",
+                "stat_like" => "like",
             ),
             $select::JOIN_LEFT
         );

@@ -1,6 +1,7 @@
 <?php
 
 $routes[] = array("admin/login", "admin", "login");
+$routes[] = array("admin/logout", "admin", "logout");
 $routes[] = array("admin/panel", "admin", "panel");
 
 $routes[] = array("admin/adminUserManagement/roleList", "adminUserManagement", "roleList");

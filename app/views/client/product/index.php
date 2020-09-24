@@ -11,6 +11,9 @@
     $productColor = $product['hex_code']  ?? '';
     $productPrice = $product['sell_price']  ?? '';
     $productDescription = $product['description'];
+    $favoriteClass = ($product['is_favorite']) ? "fa-bookmark" : "fa-bookmark-o";
+    $likeClass = ($product['stat_like']) ? "fa-heart" : "fa-heart-o";
+    $like = $product['stat_like'] ?? 0;
 ?>
 
 <article class="selected-products-wrapper">
@@ -19,13 +22,13 @@
 
         <div class="col-6 row">
             <div class="col-1 product-actions">
-                <a class="bookmark-action" href="/bookmark/<?= $productID ?>">
+                <a class="bookmark-action" data-favorite data-product-id="<?= $productID ?>">
                     <span>علاقه مندی</span>
-                    <i class="fa fa-bookmark-o"></i>
+                    <i class="fa <?= $favoriteClass ?>"></i>
                 </a>
-                <a class="bookmark-action" href="/like/<?= $productID ?>">
+                <a class="bookmark-action" data-like data-product-id="<?= $productID ?>">
                     <span>پسندیدن</span>
-                    <i class="fa fa-heart-o"></i>
+                    <i class="fa <?= $likeClass ?>"></i>
                 </a>
                 <a class="share-action" href="/product/<?= $productID ?>">
                     <span>اشتراک</span>
@@ -62,7 +65,7 @@
                         </div>
                         <div class="statics-item">
                             <a class="bookmark-action" href="#">
-                                <span class="fa-number">136</span>
+                                <span class="fa-number"><?= $like ?></span>
                                 <i class="fa fa-thumbs-o-up"></i>
                             </a>
                         </div>
@@ -134,6 +137,10 @@
                 $productTitle = $product['title'];
                 $productSellPrice = number_format($product['sell_price']);
                 $productDescription = "";
+                $like = $product['stat_like'] ?? 0;
+                $view = $product['stat_view'] ?? 0;
+                $buy = $product['stat_buy'] ?? 0;
+                $favoriteClass = ($product['is_favorite']) ? "fa-bookmark" : "fa-bookmark-o";
 
                 $cardImage = <<<HTML
                     <!-- Card image -->
@@ -168,19 +175,19 @@ HTML;
                             <li class="list-inline-item mr-0">
                                 <div class="chip mr-0">
                                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                    1325
+                                    {$buy}
                                 </div>
                             </li>
                             <li class="list-inline-item mr-0">
                                 <div class="chip mr-0">
                                     <i class="fa fa-eye" aria-hidden="true"></i>
-                                    22268
+                                    {$view}
                                 </div>
                             </li>
                             <li class="list-inline-item mr-0">
                                 <div class="chip mr-0">
                                     <i class="fa fa-heart" aria-hidden="true"></i>
-                                    160
+                                    {$like}
                                 </div>
                             </li>
                         </ul>
@@ -188,14 +195,14 @@ HTML;
 HTML;
 
                 $product["operation"] = "
-                    <a class='bookmark-action' href='/bookmark/$productId'>
+                    <a class='bookmark-action' data-favorite data-product-id='$productId'>
                         <span>علاقه مندی</span>
-                        <i class='fa fa-bookmark-o'></i>
+                        <i class='fa {$favoriteClass}'></i>
                     </a>
-                    <a class='buy-btn' href='/add-to-cart/$productId'>
+                    <a class='buy-btn' href='/product/$productId'>
                         <span class='btn'>خرید</span>
                     </a>
-                    <a class='share-action' href='/product/$productId'>
+                    <a class='share-action' href='#'>
                         <span>اشتراک</span>
                         <i class='fa fa-share-alt'></i>
                     </a> 

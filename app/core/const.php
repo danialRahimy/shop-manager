@@ -17,9 +17,12 @@ define("OPERATION_SYSTEM", "windows"); // linux
 define("TB_ADMIN_USERS", "admin_user");
 define("TB_ADMIN_ROLE", "acl_role");
 define("TB_PRODUCT", "product");
+define("TB_PRODUCT_STAT", "product_stat");
 define("TB_PRODUCT_CATEGORIES", "product_category");
 define("TB_PRODUCT_COLORS", "product_color");
 define("TB_PRODUCT_RELATION_COLORS", "product_relation_color");
 define("TB_PRODUCT_BRANDS", "product_brand");
 define("TB_PRODUCT_IMAGE", "product_image");
 define("TB_CUSTOMERS", "customer");
+define("TB_CUSTOMER_PRODUCT_FAVORITE", "customer_product_favorite");
+define("TB_CUSTOMER_PRODUCT_LIKE", "customer_product_like");
