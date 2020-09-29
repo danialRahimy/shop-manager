@@ -184,6 +184,7 @@ CREATE TABLE `customer` (
   `username` VARCHAR(50) NOT NULL,
   `email` VARCHAR(50) DEFAULT NULL,
   `cell_number` VARCHAR(11) NOT NULL,
+  `credit_card` int(16) NOT NULL DEFAULT 0,
   `password` MEDIUMTEXT NOT NULL,
   PRIMARY KEY (`id`)
 );
@@ -264,6 +265,7 @@ CREATE TABLE `customer_factor` (
   `payed` VARCHAR(1) NOT NULL DEFAULT 'N' COMMENT 'Y: yes, N: no, S: not action',
   `address_id` INTEGER NOT NULL,
   `total` INTEGER NOT NULL,
+  `submission_date` INT(11) NOT NULL;
   PRIMARY KEY (`id`)
 );
 
@@ -378,6 +380,22 @@ CREATE TABLE `customer_product_favorite` (
   `product_id` INTEGER NOT NULL,
   PRIMARY KEY (`id`)
 );
+
+
+-- ---
+-- Table 'customer_product_like'
+--
+-- ---
+
+DROP TABLE IF EXISTS `customer_product_like`;
+
+CREATE TABLE `customer_product_like` (
+  `id` INTEGER NOT NULL AUTO_INCREMENT,
+  `customer` VARCHAR(50) NOT NULL,
+  `product_id` INTEGER NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
 
 -- ---
 -- Table Properties

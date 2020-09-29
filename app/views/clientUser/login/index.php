@@ -40,7 +40,7 @@ HTML;
                         <?= $loginForm->getForm(); ?>
                         <div class="havent-account mt-4">
                             <span class="px-1">حساب کاربری ندارید؟</span>
-                            <a href="/register">هم اکنون ثبت نمایید نمایید.</a>
+                            <a href="../../../../public/index.php">هم اکنون ثبت نمایید نمایید.</a>
                         </div>
                     </div>
                 </div>

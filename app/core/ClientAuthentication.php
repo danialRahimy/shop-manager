@@ -49,7 +49,7 @@ class ClientAuthentication
 
     public function getUsername()
     {
-        if ($this->isValid())
+        if ($this->isValid() and isset($_SESSION["client"]["user"]["username"]))
             return $_SESSION["client"]["user"]["username"];
 
         return "";

@@ -26,3 +26,7 @@ define("TB_PRODUCT_IMAGE", "product_image");
 define("TB_CUSTOMERS", "customer");
 define("TB_CUSTOMER_PRODUCT_FAVORITE", "customer_product_favorite");
 define("TB_CUSTOMER_PRODUCT_LIKE", "customer_product_like");
+define("TB_FACTOR", "customer_factor");
+define("TB_FACTOR_DETAIL", "customer_factor_details");
+define("TB_CART", "customer_basket");
+define("TB_ADDRESS", "customer_address");

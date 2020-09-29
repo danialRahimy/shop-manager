@@ -539,40 +539,13 @@ class ClientController extends BaseController
         echo $this->view->render("client");
     }
 
-    public function loginRegisterFormsAction()
+
+    public function pageNotFoundAction()
     {
-        $this->view->pageID = "login-register";
-        $this->view->title = "ورود به سایت یا ثبت نام - برند فروشگاه";
-        echo $this->view->render("client", false);
-    }
+//        header('location: /404');
 
-    public function loginAction()
-    {
-        $this->view->pageID = "login";
-        $this->view->title = "ورود به سایت - برند فروشگاه";
-        echo $this->view->render("client", false);
-    }
-
-    public function registerAction()
-    {
-        $customerName = $this->getRequest("name");
-        $customerFamily = $this->getRequest("family");
-        $customerUsername = $this->getRequest("username");
-        $customerEmail = $this->getRequest("email");
-        $customerPhone = $this->getRequest("tel");
-        $customerPassword = $this->getRequest("password");
-
-        $customerHashedPassword= password_hash($customerPassword, PASSWORD_BCRYPT);
-
-        $this->view->customerName = $customerName;
-        $this->view->customerFamily = $customerFamily;
-        $this->view->customerUsername = $customerUsername;
-        $this->view->customerEmail = $customerEmail;
-        $this->view->customerPhone = $customerPhone;
-        $this->view->customerHashedPassword = $customerHashedPassword;
-
-        $this->view->pageID = "register";
-        $this->view->title = "ثبت نام در سایت - برند فروشگاه";
-        echo $this->view->render("client", false);
+        $this->view->pageID = "page-404";
+        $this->view->title = "404 صفحه مورد نظر پیدا نشد! - برند فروشگاه";
+        echo $this->view->render("client");
     }
 }

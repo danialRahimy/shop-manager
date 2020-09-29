@@ -50,7 +50,7 @@ HTML;
                         <?= $registerForm->getForm(); ?>
                         <div class="havent-account mt-4">
                             <span class="px-1">حساب کاربری دارید؟</span>
-                            <a href="/login">هم اکنون وارد شوید.</a>
+                            <a href="../../../../public/index.php">هم اکنون وارد شوید.</a>
                         </div>
                     </div>
                 </div>

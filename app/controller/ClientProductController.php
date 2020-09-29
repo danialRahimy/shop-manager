@@ -76,7 +76,6 @@ class ClientProductController extends ClientController
 
             $connection->commit();
         }catch (Exception $e){
-echo $e->getMessage();
             $connection->rollback();
         }
 

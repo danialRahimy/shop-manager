@@ -19,6 +19,6 @@ $(document).ready(function () {
         clientLikeProduct(productId, $(this));
     })
     //END //add like product
-
+    $(".share-action").click(copyShareLink);
 });
 

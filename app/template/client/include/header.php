@@ -24,7 +24,9 @@
             <ul class="navbar-nav ml-auto top-menu-categories">
                 <?php
 
-                      foreach ($categories as $category) {
+                $categoriesInMenu = (new ClientMenuBuilder())->getMenu();
+
+                      foreach ($categoriesInMenu as $category) {
 
                         $subCategories = $category['subCategories'];
                         $categoryTitle = $category['title'];
@@ -75,23 +77,45 @@ HTML;
 
             <!-- user icons -->
             <ul class="navbar-nav mr-auto nav-flex-icons">
+
+                <?php if(isset($_SESSION["client"]["user"]["username"])): ?>
+
                 <li class="nav-item">
-                    <a class="nav-link waves-effect waves-light">
+                    <a href="/cart" class="nav-link waves-effect waves-light">
                         <i class="fa fa-shopping-cart"></i>
                     </a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+
+                <li class="nav-item dropdown mr-1">
+                    <a class="nav-link dropdown-toggle" id="user-profile-menu" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-user"></i>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-left dropdown-default"
-                         aria-labelledby="navbarDropdownMenuLink-333">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                    <div class="dropdown-menu dropdown-menu-left dropdown-default user-profile-menu"
+                         aria-labelledby="user-profile-menu">
+                        <a href="/user/profile" class="dropdown-item profile-details-link">
+                            <span class="username">سلام <?= $_SESSION["client"]["user"]["username"]; ?> !</span>
+                            <span>حساب کاربری</span>
+                        </a>
+                        <a class="dropdown-item" href="/user/orders">آخرین سفارشات</a>
+                        <a class="dropdown-item" href="/user/logout">خروج از سایت</a>
                     </div>
                 </li>
+
+                <?php else: ?>
+                    <li class="nav-item">
+                        <a href="/cart" class="nav-link waves-effect waves-light">
+                            <i class="fa fa-shopping-cart"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item mr-2">
+                        <a href="/login-register" class="nav-link waves-effect waves-light btn border-white">
+                            <span class="login-label">ورود/ ایجاد به حساب کاربری</span>
+                            <i class="fa fa-user"></i>
+                        </a>
+                    </li>
+
+                <?php endif; ?>
             </ul>
 
         </nav>
